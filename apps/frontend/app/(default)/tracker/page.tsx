@@ -27,7 +27,7 @@ export default function TrackerPage() {
           <ArrowLeft className="h-3.5 w-3.5" />
           {t('nav.backToDashboard')}
         </Link>
-        <div className="flex min-h-0 flex-1 flex-col overflow-hidden border border-black bg-background shadow-sw-lg">
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden border border-border bg-background shadow-sw-lg">
           <KanbanBoard />
         </div>
       </div>

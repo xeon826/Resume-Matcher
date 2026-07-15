@@ -55,9 +55,9 @@ function EnhancementCard({ enhancement }: EnhancementCardProps) {
       : t('enrichment.itemType.project');
 
   return (
-    <div className="border-2 border-black bg-white shadow-sw-default">
+    <div className="border-2 border-border bg-card shadow-sw-default">
       {/* Card header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-black bg-paper-tint">
+      <div className="flex items-center gap-2 px-4 py-3 border border-border bg-paper-tint">
         {enhancement.item_type === 'experience' ? (
           <Briefcase className="w-4 h-4" />
         ) : (
@@ -77,7 +77,7 @@ function EnhancementCard({ enhancement }: EnhancementCardProps) {
               <span className="text-xs font-mono font-bold uppercase text-ink-soft">
                 {t('enrichment.preview.keepingLabel')}
               </span>
-              <span className="text-xs text-steel-grey">
+              <span className="text-xs text-muted-foreground">
                 {t('enrichment.preview.existingCount', {
                   count: enhancement.original_description.length,
                 })}
@@ -90,7 +90,7 @@ function EnhancementCard({ enhancement }: EnhancementCardProps) {
                 </li>
               ))}
               {enhancement.original_description.length === 0 && (
-                <li className="text-sm text-steel-grey italic">
+                <li className="text-sm text-muted-foreground italic">
                   {t('enrichment.preview.noExistingDescription')}
                 </li>
               )}
@@ -100,10 +100,10 @@ function EnhancementCard({ enhancement }: EnhancementCardProps) {
           {/* New bullets - adding */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-mono font-bold uppercase text-green-600">
+              <span className="text-xs font-mono font-bold uppercase text-success">
                 {t('enrichment.preview.addingLabel')}
               </span>
-              <span className="text-xs text-green-600">
+              <span className="text-xs text-success">
                 {t('enrichment.preview.newCount', {
                   count: enhancement.enhanced_description.length,
                 })}
@@ -113,7 +113,7 @@ function EnhancementCard({ enhancement }: EnhancementCardProps) {
               {enhancement.enhanced_description.map((bullet, i) => (
                 <li
                   key={i}
-                  className="text-sm text-ink-soft pl-4 bg-green-50 py-1 pr-2 border border-green-500"
+                  className="text-sm text-ink-soft pl-4 bg-success/10 py-1 pr-2 border border-success/20"
                 >
                   {bullet}
                 </li>

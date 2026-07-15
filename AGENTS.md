@@ -25,7 +25,7 @@ Before exploring code, read [docs/agent/README.md](docs/agent/README.md) for pro
 
 ## Non-Negotiable Rules
 
-1. **All frontend UI changes** MUST follow [Swiss International Style](docs/portable/swiss-design-system/README.md) — see [tokens](docs/portable/swiss-design-system/tokens.md), [components](docs/portable/swiss-design-system/components.md), [anti-patterns](docs/portable/swiss-design-system/anti-patterns.md)
+1. **All frontend UI changes** MUST follow the [Dark Fintech design system](docs/portable/swiss-design-system/README.md) — see [tokens](docs/portable/swiss-design-system/tokens.md), [components](docs/portable/swiss-design-system/components.md), [anti-patterns](docs/portable/swiss-design-system/anti-patterns.md)
 2. **All Python functions** MUST have type hints
 3. **Run `npm run lint`** before committing frontend changes
 4. **Run `npm run format`** (Prettier) before committing
@@ -99,7 +99,7 @@ apps/
 
 ### For Frontend Changes
 1. [Frontend workflow](docs/agent/architecture/frontend-workflow.md) - User flow, components
-2. [Swiss design system pack](docs/portable/swiss-design-system/README.md) - **REQUIRED** Swiss International Style (portable pack)
+2. [Dark Fintech design system pack](docs/portable/swiss-design-system/README.md) - **REQUIRED** dark fintech / warm-sunset theme (portable pack)
 3. [Next.js performance pack](docs/portable/nextjs-performance/README.md) - **REQUIRED** Next.js 15 perf patterns (portable pack)
 4. [Coding standards](docs/agent/coding-standards.md) - Frontend conventions
 
@@ -169,16 +169,18 @@ Both apps have real test suites, and **tests are in scope** (deliberate testing 
 
 | Element | Value |
 |---------|-------|
-| Canvas background | `#F0F0E8` |
-| Ink (text) | `#000000` |
-| Hyper Blue (links) | `#1D4ED8` |
-| Signal Green (success) | `#15803D` |
-| Alert Orange (warning) | `#F97316` |
-| Alert Red (error) | `#DC2626` |
-| Headers font | `font-serif` |
-| Body font | `font-sans` |
-| Metadata font | `font-mono` |
-| Borders | `rounded-none`, 1px black, hard shadows |
+| Page / canvas background | `#2B2B33` |
+| Foreground (text) | `#FFFFFF` |
+| Primary (gold) | `#F5C542` |
+| Gradient (sunset) | `#F56B3F` → `#FFD65C` |
+| Success (green) | `#3DDC97` |
+| Warning (pale gold) | `#F7D488` |
+| Destructive (red) | `#E14B4B` |
+| Secondary text / muted | `#9B9BA5` / `#5C5C66` |
+| Sans + headers font | `font-sans` (Inter) |
+| Metadata / digits font | `font-mono` (Space Grotesk) |
+| Surfaces | card `#1C1C22`, popover `#212127`, border `#3A3A42` |
+| Corners / shadows | `rounded-md` / `rounded-lg`, soft-glow `shadow-sw-*` |
 
 ---
 
@@ -189,7 +191,7 @@ Before completing a task:
 - [ ] Code compiles without errors
 - [ ] Backend tests pass (`uv run pytest`); frontend tests pass (`npm run test`)
 - [ ] `npm run lint` passes
-- [ ] UI changes follow Swiss International Style
+- [ ] UI changes follow the Dark Fintech design system
 - [ ] Python functions have type hints
 - [ ] Schema/prompt changes documented
 - [ ] New behavior covered by a deterministic test (it must fail if the behavior breaks)

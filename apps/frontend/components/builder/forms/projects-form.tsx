@@ -103,7 +103,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
           variant="outline"
           size="sm"
           onClick={handleAdd}
-          className="rounded-none border-black hover:bg-black hover:text-white transition-colors"
+          className="rounded-md border-border hover:bg-foreground hover:text-background transition-colors"
         >
           <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.projects.addProject')}
         </Button>
@@ -111,7 +111,10 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
 
       <div className="space-y-8">
         {data.map((item) => (
-          <div key={item.id} className="p-6 border border-black bg-paper-tint relative group">
+          <div
+            key={item.id}
+            className="p-6 border border-border bg-paper-tint relative group rounded-md"
+          >
             <Button
               variant="ghost"
               size="icon"
@@ -132,7 +135,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   value={item.name || ''}
                   onChange={(e) => handleChange(item.id, 'name', e.target.value)}
                   placeholder={t('builder.forms.projects.placeholders.projectName')}
-                  className="rounded-none border-black bg-white"
+                  className="rounded-md border-border bg-card"
                 />
               </div>
               <div className="space-y-2">
@@ -143,7 +146,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   value={item.role || ''}
                   onChange={(e) => handleChange(item.id, 'role', e.target.value)}
                   placeholder={t('builder.forms.projects.placeholders.role')}
-                  className="rounded-none border-black bg-white"
+                  className="rounded-md border-border bg-card"
                 />
               </div>
               <div className="space-y-2">
@@ -155,7 +158,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   value={item.years || ''}
                   onChange={(e) => handleChange(item.id, 'years', e.target.value)}
                   placeholder={t('builder.forms.projects.placeholders.years')}
-                  className="rounded-none border-black bg-white"
+                  className="rounded-md border-border bg-card"
                 />
               </div>
               <div className="space-y-2">
@@ -167,7 +170,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   value={item.github || ''}
                   onChange={(e) => handleChange(item.id, 'github', e.target.value)}
                   placeholder={t('builder.forms.projects.placeholders.github')}
-                  className="rounded-none border-black bg-white"
+                  className="rounded-md border-border bg-card"
                 />
               </div>
               <div className="space-y-2 md:col-span-2">
@@ -180,7 +183,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   value={item.website || ''}
                   onChange={(e) => handleChange(item.id, 'website', e.target.value)}
                   placeholder={t('builder.forms.projects.placeholders.website')}
-                  className="rounded-none border-black bg-white"
+                  className="rounded-md border-border bg-card"
                 />
               </div>
             </div>
@@ -194,7 +197,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
                   variant="ghost"
                   size="sm"
                   onClick={() => handleAddDescription(item.id)}
-                  className="h-6 text-xs text-blue-700 hover:text-blue-800 hover:bg-blue-50"
+                  className="h-6 text-xs text-primary hover:text-primary hover:bg-primary/10"
                 >
                   <Plus className="w-3 h-3 mr-1" /> {t('builder.genericItemForm.actions.addPoint')}
                 </Button>

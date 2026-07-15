@@ -497,7 +497,7 @@ Resume-Matcher/
 |-------------|------|
 | [backend-guide.md](docs/agent/architecture/backend-guide.md) | バックエンドのアーキテクチャと API 詳細 |
 | [frontend-workflow.md](docs/agent/architecture/frontend-workflow.md) | ユーザーフローとコンポーネント構成 |
-| [swiss-design-system/](docs/portable/swiss-design-system/README.md) | UI デザインシステム（Swiss International Style）— ポータブルパック |
+| [swiss-design-system/](docs/portable/swiss-design-system/README.md) | UI デザインシステム（Dark Fintech / warm-sunset テーマ）— ポータブルパック |
 
 ---
 

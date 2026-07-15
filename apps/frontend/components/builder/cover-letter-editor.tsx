@@ -36,7 +36,7 @@ export function CoverLetterEditor({
   return (
     <div className={cn('flex flex-col h-full', className)}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b-2 border-black bg-[#F5F5F0]">
+      <div className="flex items-center justify-between p-4 border-b-2 border-border bg-muted">
         <div className="flex items-center gap-2">
           <FileText className="w-4 h-4" />
           <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
@@ -63,9 +63,9 @@ export function CoverLetterEditor({
           className={cn(
             'w-full h-full min-h-[400px] p-4',
             'font-mono text-sm leading-relaxed',
-            'border-2 border-black bg-white',
+            'border-2 border-border bg-card',
             'resize-none',
-            'focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2',
+            'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
             'placeholder:text-steel-grey'
           )}
         />

@@ -2,7 +2,7 @@
 
 > Project-specific reference for agents working in the Resume Matcher codebase.
 
-Generic, reusable guides (Swiss design system, Next.js performance) live in [`../portable/`](../portable/README.md) as standalone packs that can be lifted out of this repo and dropped into any project. This index covers only the docs that are tied to Resume Matcher itself.
+Generic, reusable guides (Dark Fintech design system, Next.js performance) live in [`../portable/`](../portable/README.md) as standalone packs that can be lifted out of this repo and dropped into any project. This index covers only the docs that are tied to Resume Matcher itself.
 
 ## Quick Navigation
 
@@ -61,7 +61,7 @@ Generic, reusable guides (Swiss design system, Next.js performance) live in [`..
 ### Portable packs (live outside this folder)
 | Pack | Purpose |
 |------|---------|
-| [swiss-design-system](../portable/swiss-design-system/README.md) | Full Swiss style design system — required reading for frontend work |
+| [swiss-design-system](../portable/swiss-design-system/README.md) | Dark Fintech design system — required reading for frontend work |
 | [nextjs-performance](../portable/nextjs-performance/README.md) | Next.js 15 performance optimizations — required reading for frontend work |
 
 ## Project Structure

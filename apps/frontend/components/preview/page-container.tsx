@@ -55,7 +55,7 @@ export function PageContainer({
     <div className="relative flex flex-col items-center">
       {/* Page wrapper with scale transform */}
       <div
-        className="relative bg-white border-2 border-black shadow-sw-card origin-top"
+        className="relative bg-card border-2 border-border shadow-sw-card origin-top"
         style={{
           width: pageWidthPx,
           height: pageHeightPx,
@@ -72,14 +72,14 @@ export function PageContainer({
               left: marginLeftPx,
               width: contentWidth,
               height: maxContentHeight,
-              border: '1px dashed rgba(29, 78, 216, 0.5)',
+              border: '1px dashed rgba(245, 197, 66, 0.5)',
             }}
           >
             {/* Corner markers */}
-            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-blue-500" />
-            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-blue-500" />
-            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-blue-500" />
-            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-blue-500" />
+            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-warning" />
+            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-warning" />
+            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-warning" />
+            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-warning" />
           </div>
         )}
 

@@ -1,0 +1,122 @@
+# Resume Matcher — Development Image
+#
+# Runs BOTH the frontend (Next.js dev / Turbopack HMR) and the backend
+# (uvicorn --reload) in ONE container, mirroring the production single-container
+# model (see docker/start.sh). Application source is bind-mounted at runtime via
+# docker-compose.dev.yml — this image only installs dependencies.
+#
+# It does NOT run `npm run build`, so it builds successfully even while the
+# production build is blocked (e.g. i18n locale-parity drift in messages/*.json).
+#
+# Usage (see docker-compose.dev.yml):
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+
+# ============================================
+# Stage 1: Install Frontend Dependencies
+# ============================================
+# Same base as the prod frontend-builder so native modules are glibc/Debian
+# bookworm compatible with the final python:3.13-slim-bookworm image below.
+FROM node:22-bookworm AS frontend-deps
+
+ENV NEXT_TELEMETRY_DISABLED=1
+
+WORKDIR /app/apps/frontend
+
+# Copy package files first for layer caching.
+COPY apps/frontend/package*.json ./
+
+# Install ALL dependencies (incl. devDeps) WITHOUT building.
+# `npm install` (not `npm ci`) tolerates lockfile/package drift in development.
+RUN npm install
+
+# ============================================
+# Stage 2: Development Image (Node + Python + Playwright)
+# ============================================
+FROM python:3.13-slim-bookworm AS development
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    NODE_ENV=development \
+    NEXT_TELEMETRY_DISABLED=1
+
+# System dependencies — same Playwright runtime libraries as the prod image
+# (Dockerfile lines 43-64), plus curl for the backend health poll.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libatspi2.0-0 \
+    libgtk-3-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy the Node.js runtime from the node stage. The production image copies ONLY
+# the `node` binary (it runs the prebuilt standalone server); the dev image also
+# needs npm/npx to launch `next dev`, so we copy the full node toolchain.
+COPY --from=frontend-deps /usr/local/bin/node /usr/local/bin/node
+COPY --from=frontend-deps /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=frontend-deps /usr/local/bin/npm /usr/local/bin/npm
+COPY --from=frontend-deps /usr/local/bin/npx /usr/local/bin/npx
+
+# ============================================
+# Backend Setup
+# ============================================
+COPY apps/backend/pyproject.toml /app/apps/backend/
+COPY apps/backend/app /app/apps/backend/app
+
+WORKDIR /app/apps/backend
+RUN pip install .
+
+# ============================================
+# Frontend Dependencies (seeded; protected by compose anonymous volume)
+# ============================================
+# Seed node_modules into the image so `next dev` can start immediately. The
+# `frontend-node-modules` named volume in docker-compose.dev.yml preserves this
+# directory at runtime so the host bind-mount (./apps) cannot shadow it.
+# NOTE: if package.json changes, re-seed with: docker compose ... down -v
+COPY --from=frontend-deps /app/apps/frontend/node_modules /app/apps/frontend/node_modules
+
+# ============================================
+# Data Directory, Playwright & Non-root User
+# ============================================
+RUN mkdir -p /app/apps/backend/data
+
+RUN useradd -m -u 1000 appuser \
+    && chown -R appuser:appuser /app
+
+USER appuser
+
+# Install Playwright Chromium as appuser so browsers land in the appuser cache
+# that start-dev.sh checks for (mirrors the prod image).
+RUN python -m playwright install chromium
+
+EXPOSE 3000
+
+WORKDIR /app
+
+# Dev entrypoint — uvicorn --reload + next dev (Turbopack HMR).
+COPY --chown=appuser:appuser docker/start-dev.sh /app/start-dev.sh
+RUN sed -i 's/\r$//' /app/start-dev.sh && chmod +x /app/start-dev.sh
+
+# Health check on internal backend port (independent of host port mapping).
+HEALTHCHECK --interval=10s --timeout=10s --start-period=60s --retries=5 \
+    CMD curl -f http://127.0.0.1:8000/api/v1/health || exit 1
+
+CMD ["/app/start-dev.sh"]

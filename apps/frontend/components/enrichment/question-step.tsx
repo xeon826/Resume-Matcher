@@ -90,10 +90,10 @@ export function QuestionStep({
               key={i}
               className={`h-1.5 w-6 transition-colors ${
                 i < questionNumber
-                  ? 'bg-black'
+                  ? 'bg-foreground'
                   : i === questionNumber - 1
-                    ? 'bg-black'
-                    : 'bg-paper-tint'
+                    ? 'bg-foreground'
+                    : 'bg-muted'
               }`}
             />
           ))}

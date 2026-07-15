@@ -556,7 +556,7 @@ Stuck? Here are your options:
 |----------|-------------|
 | [backend-guide.md](docs/agent/architecture/backend-guide.md) | Backend architecture and API details |
 | [frontend-workflow.md](docs/agent/architecture/frontend-workflow.md) | User flow and component architecture |
-| [swiss-design-system/](docs/portable/swiss-design-system/README.md) | UI design system (Swiss International Style) — portable pack |
+| [swiss-design-system/](docs/portable/swiss-design-system/README.md) | UI design system (Dark Fintech / warm-sunset theme) — portable pack |
 
 ---
 

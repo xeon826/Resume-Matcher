@@ -56,8 +56,8 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({ value, onCha
           onClick={() => onChange(template.id)}
           className={`group flex flex-col items-center p-3 border-2 transition-all ${
             value === template.id
-              ? 'border-blue-700 bg-white shadow-[3px_3px_0px_0px_#1D4ED8]'
-              : 'border-black bg-white hover:bg-background hover:shadow-sw-sm'
+              ? 'border-primary bg-card shadow-sw-sm'
+              : 'border-border bg-card hover:bg-background hover:shadow-sw-xs'
           }`}
           title={templateLabels[template.id].description}
         >
@@ -69,7 +69,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({ value, onCha
           {/* Template Name */}
           <span
             className={`font-mono text-[10px] uppercase tracking-wider font-bold ${
-              value === template.id ? 'text-blue-700' : 'text-ink-soft'
+              value === template.id ? 'text-primary' : 'text-ink-soft'
             }`}
           >
             {templateLabels[template.id].name}
@@ -92,9 +92,9 @@ interface TemplateThumbnailProps {
 }
 
 export const TemplateThumbnail: React.FC<TemplateThumbnailProps> = ({ type, isActive }) => {
-  const lineColor = isActive ? 'bg-blue-700' : 'bg-steel-grey';
-  const borderColor = isActive ? 'border-blue-700' : 'border-steel-grey';
-  const accentColor = isActive ? 'bg-blue-600' : 'bg-blue-400';
+  const lineColor = isActive ? 'bg-primary' : 'bg-steel-grey';
+  const borderColor = isActive ? 'border-primary' : 'border-steel-grey';
+  const accentColor = isActive ? 'bg-primary' : 'bg-primary';
 
   if (type === 'swiss-single') {
     // Single column thumbnail
@@ -207,7 +207,7 @@ export const TemplateThumbnail: React.FC<TemplateThumbnailProps> = ({ type, isAc
           {/* Right column (narrower). Active state uses a heavier full
               border instead of a left stripe (impeccable BAN 1). */}
           <div
-            className={`w-1/3 border ${isActive ? 'border-blue-600' : 'border-blue-300'} pl-1 space-y-0.5`}
+            className={`w-1/3 border ${isActive ? 'border-primary' : 'border-border'} pl-1 space-y-0.5`}
           >
             <div className={`h-0.5 ${accentColor} w-full`}></div>
             <div className={`h-0.5 ${lineColor} w-4/5 opacity-50`}></div>

@@ -2,30 +2,32 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Swiss International Style Button Component
+ * Button Component — Dark fintech / warm-sunset theme
  *
  * Design Principles:
- * - Hard shadows (no blur) that create depth
- * - Square corners (rounded-none) - Brutalist aesthetic
- * - High contrast black borders
- * - Hover: translate + shadow removal creates "press" effect
+ * - Soft glow shadows (dark, blurred) create depth on dark surfaces
+ * - Rounded corners (rounded-md) for a modern fintech feel
+ * - Subtle 1px borders (border-border) for definition
+ * - Hover: background darkens; Active: slight translate for a tactile press
  * - Clear semantic variants for different actions
  */
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Visual variant determining color and purpose:
-   * - `default`: Hyper Blue (#1D4ED8) - Primary actions (save, submit, create)
-   * - `destructive`: Alert Red (#DC2626) - Destructive actions (delete, remove)
-   * - `success`: Signal Green (#15803D) - Positive actions (download, confirm, complete)
-   * - `warning`: Alert Orange (#F97316) - Caution actions (reset, clear, undo)
-   * - `outline`: Transparent + black border - Secondary actions (cancel, back)
-   * - `secondary`: Panel Grey (#E5E5E0) - Tertiary actions
-   * - `ghost`: No background - Subtle actions (icon buttons, navigation)
-   * - `link`: Text only with underline - Inline links
+   * - `default`: Gold (#F5C542) — Primary actions (save, submit, create)
+   * - `gradient`: Sunset gradient (coral → amber) — Prominent hero CTA
+   * - `destructive`: Alert Red (#E14B4B) — Destructive actions (delete, remove)
+   * - `success`: Fresh Green (#3DDC97) — Positive actions (download, confirm, complete)
+   * - `warning`: Pale Gold (#F7D488) — Caution actions (reset, clear, undo)
+   * - `outline`: Elevated surface with border — Secondary actions (cancel, back)
+   * - `secondary`: Panel surface — Tertiary actions
+   * - `ghost`: No background — Subtle actions (icon buttons, navigation)
+   * - `link`: Text only with underline — Inline links
    */
   variant?:
     | 'default'
+    | 'gradient'
     | 'destructive'
     | 'success'
     | 'warning'
@@ -46,22 +48,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', size = 'default', ...props }, ref) => {
     // Base styles applied to ALL buttons
-    // Swiss Design: clean, functional, high contrast
     const baseStyles = cn(
       // Layout & Typography
       'relative inline-flex items-center justify-center gap-2',
       'whitespace-nowrap text-sm font-medium font-mono uppercase tracking-wide',
       // Transitions — only the properties that actually change on hover/active.
-      // Avoids the perf footgun of `transition-all` and matches Swiss "snap" feel.
-      'transition-[transform,box-shadow,background-color] duration-100 ease-out',
-      // Focus state - sharp blue ring (not soft glow)
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2',
+      'transition-[transform,box-shadow,background-color] duration-150 ease-out',
+      // Focus state — gold ring (theme --ring)
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
       // Disabled state
       'disabled:pointer-events-none disabled:opacity-50',
       // SVG icon sizing
       "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
-      // Swiss Design: NO rounded corners
-      'rounded-none'
+      // Rounded corners (dark theme)
+      'rounded-md'
     );
 
     // Hit-area expansion for icon-only buttons. Many call sites override
@@ -76,85 +76,80 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Variant styles - each has distinct purpose and color
     const variants = {
-      // PRIMARY - Hyper Blue (#1D4ED8 / blue-700)
-      // Use for: Save, Submit, Create, Primary CTA
+      // PRIMARY — Gold (#F5C542). Use for: Save, Submit, Create, Primary CTA.
       default: cn(
-        'bg-blue-700 text-white',
-        'border border-black',
+        'bg-primary text-primary-foreground',
+        'border border-border',
         'shadow-sw-sm',
-        'hover:bg-blue-800',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'hover:bg-primary/90',
+        'active:translate-y-[1px]'
       ),
 
-      // DESTRUCTIVE - Alert Red (#DC2626 / red-600)
-      // Use for: Delete, Remove, Destroy, Dangerous actions
+      // GRADIENT — Sunset (coral → amber). Use for: prominent hero CTA.
+      gradient: cn(
+        'bg-gradient-sunset text-primary-foreground',
+        'border border-border',
+        'shadow-sw-sm',
+        'hover:opacity-90',
+        'active:translate-y-[1px]'
+      ),
+
+      // DESTRUCTIVE — Alert Red (#E14B4B). Use for: Delete, Remove, Dangerous actions.
       destructive: cn(
-        'bg-red-600 text-white',
-        'border border-black',
+        'bg-destructive text-destructive-foreground',
+        'border border-border',
         'shadow-sw-sm',
-        'hover:bg-red-700',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'hover:bg-destructive/90',
+        'active:translate-y-[1px]'
       ),
 
-      // SUCCESS - Signal Green (#15803D / green-700)
-      // Use for: Download, Confirm, Complete, Positive actions
+      // SUCCESS — Fresh Green (#3DDC97). Use for: Download, Confirm, Complete.
       success: cn(
-        'bg-green-700 text-white',
-        'border border-black',
+        'bg-success text-primary-foreground',
+        'border border-border',
         'shadow-sw-sm',
-        'hover:bg-green-800',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'hover:bg-success/90',
+        'active:translate-y-[1px]'
       ),
 
-      // WARNING - Alert Orange (#F97316 / orange-500)
-      // Use for: Reset, Clear, Undo, Caution actions
+      // WARNING — Pale Gold (#F7D488). Use for: Reset, Clear, Undo, Caution actions.
       warning: cn(
-        'bg-orange-500 text-white',
-        'border border-black',
+        'bg-warning text-primary-foreground',
+        'border border-border',
         'shadow-sw-sm',
-        'hover:bg-orange-600',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'hover:bg-warning/90',
+        'active:translate-y-[1px]'
       ),
 
-      // OUTLINE - Canvas background with black border
-      // Use for: Cancel, Back, Secondary actions, Navigation
+      // OUTLINE — Elevated surface with border. Use for: Cancel, Back, Secondary actions.
       outline: cn(
-        'bg-background text-black',
-        'border border-black',
+        'bg-background text-foreground',
+        'border border-border',
         'shadow-sw-sm',
         'hover:bg-secondary',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'active:translate-y-[1px]'
       ),
 
-      // SECONDARY - Panel Grey (#E5E5E0)
-      // Use for: Less prominent actions, Toolbar buttons
+      // SECONDARY — Panel surface (#212127). Use for: Less prominent actions, Toolbar buttons.
       secondary: cn(
-        'bg-secondary text-black',
-        'border border-black',
+        'bg-secondary text-secondary-foreground',
+        'border border-border',
         'shadow-sw-sm',
-        'hover:bg-[#D8D8D2]',
-        'hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-        'active:translate-y-[2px] active:translate-x-[2px]'
+        'hover:bg-secondary/80',
+        'active:translate-y-[1px]'
       ),
 
-      // GHOST - No background, minimal styling
-      // Use for: Icon buttons, Subtle navigation, Toolbars
+      // GHOST — No background, minimal styling. Use for: Icon buttons, Subtle navigation.
       ghost: cn(
-        'bg-transparent text-black',
+        'bg-transparent text-foreground',
         'border-none shadow-none',
         'hover:bg-paper-tint',
         'active:bg-paper-tint'
       ),
 
-      // LINK - Text only with underline
-      // Use for: Inline links, Text navigation
+      // LINK — Text only with underline. Use for: Inline links, Text navigation.
       link: cn(
-        'bg-transparent text-blue-700',
+        'bg-transparent text-primary',
         'border-none shadow-none',
         'underline-offset-4 hover:underline',
         'p-0 h-auto'

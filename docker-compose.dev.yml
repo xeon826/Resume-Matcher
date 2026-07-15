@@ -1,0 +1,42 @@
+# Resume Matcher — Development Override
+#
+# Bind-mounts the application source so host edits hot-reload inside the
+# container (frontend Turbopack HMR + backend uvicorn --reload). Use WITH the
+# base compose file:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+#
+# The first build installs dependencies only (no `npm run build`), so it
+# succeeds even while the production build is blocked (e.g. i18n drift).
+# Subsequent `up` is instant and live-edits reflect immediately.
+#
+# ── node_modules handling ──────────────────────────────────────────────────
+# The `frontend-node-modules` named volume protects the image-installed
+# dependencies from being shadowed by the host bind-mount (./apps has no
+# node_modules, or a different one). If you change package.json, re-seed:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+
+services:
+  resume-matcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: development
+    image: resume-matcher:dev
+    container_name: resume-matcher-dev
+    volumes:
+      # Live source — host edits reflect immediately (HMR + uvicorn --reload).
+      - ./apps:/app/apps
+      # Protect image-installed node_modules from the host bind-mount shadow.
+      - frontend-node-modules:/app/apps/frontend/node_modules
+      # Persistent backend data (SQLite + encrypted keys) at the dev data path.
+      - resume-data:/app/apps/backend/data
+    ports:
+      # Next.js dev server. (Backend stays internal on :8000, proxied at /api.)
+      - "${PORT:-3000}:3000"
+    # Don't auto-restart on exit in dev — surface errors instead of looping.
+    restart: "no"
+
+volumes:
+  frontend-node-modules:

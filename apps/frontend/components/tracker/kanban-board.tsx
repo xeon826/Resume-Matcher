@@ -186,9 +186,9 @@ export function KanbanBoard() {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       {/* Header — mirrors the dashboard canvas header */}
-      <div className="flex shrink-0 flex-col gap-4 border-b border-black p-6 md:flex-row md:items-center md:justify-between md:p-8">
+      <div className="flex shrink-0 flex-col gap-4 border-b border-border p-6 md:flex-row md:items-center md:justify-between md:p-8">
         <div>
-          <h1 className="font-serif text-3xl font-bold uppercase tracking-tight text-ink md:text-4xl">
+          <h1 className="font-sans text-3xl font-bold uppercase tracking-tight text-ink md:text-4xl">
             {t('tracker.title')}
           </h1>
           <p className="mt-2 font-mono text-xs uppercase tracking-wide text-ink-soft">
@@ -203,7 +203,7 @@ export function KanbanBoard() {
                 aria-label={t('tracker.scroll.prev')}
                 onClick={() => scrollByColumn(-1)}
                 disabled={!canScrollLeft}
-                className="flex h-10 w-10 items-center justify-center border border-black bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center border border-border bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -212,7 +212,7 @@ export function KanbanBoard() {
                 aria-label={t('tracker.scroll.next')}
                 onClick={() => scrollByColumn(1)}
                 disabled={!canScrollRight}
-                className="-ml-px flex h-10 w-10 items-center justify-center border border-black bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
+                className="-ml-px flex h-10 w-10 items-center justify-center border border-border bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -226,13 +226,13 @@ export function KanbanBoard() {
       </div>
 
       {error && (
-        <div className="shrink-0 border-b border-black bg-background px-6 py-3 font-mono text-xs text-destructive md:px-8">
+        <div className="shrink-0 border-b border-border bg-background px-6 py-3 font-mono text-xs text-destructive md:px-8">
           {error}
         </div>
       )}
 
       {selectedIds.size > 0 && (
-        <div className="shrink-0 border-b border-black px-6 py-3 md:px-8">
+        <div className="shrink-0 border-b border-border px-6 py-3 md:px-8">
           <BulkActionBar
             selectedCount={selectedIds.size}
             onMove={handleBulkMove}
@@ -266,7 +266,7 @@ export function KanbanBoard() {
                   key={status}
                   data-column={status}
                   className={`flex ${
-                    index < APPLICATION_STATUS_ORDER.length - 1 ? 'border-r border-black' : ''
+                    index < APPLICATION_STATUS_ORDER.length - 1 ? 'border-r border-border' : ''
                   }`}
                 >
                   <KanbanColumn
@@ -285,9 +285,9 @@ export function KanbanBoard() {
       </div>
 
       {/* Stage rail — an always-visible map of every stage (with counts) so
-          off-screen sections are never lost; click a stage to jump to it. */}
+           off-screen sections are never lost; click a stage to jump to it. */}
       {!isEmpty && (
-        <div className="flex shrink-0 items-center gap-3 overflow-x-auto border-t border-black bg-paper-tint px-6 py-2 md:px-8">
+        <div className="flex shrink-0 items-center gap-3 overflow-x-auto border-t border-border bg-paper-tint px-6 py-2 md:px-8">
           {canScrollRight && (
             <span className="flex shrink-0 items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-wide text-primary">
               {t('tracker.scroll.hint')}
@@ -300,7 +300,7 @@ export function KanbanBoard() {
                 key={status}
                 type="button"
                 onClick={() => scrollToColumn(status)}
-                className="flex shrink-0 items-center gap-1.5 border border-black bg-background px-2 py-1 font-mono text-[11px] uppercase tracking-wide text-ink-soft shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:text-primary hover:shadow-none"
+                className="flex shrink-0 items-center gap-1.5 border border-border bg-background px-2 py-1 font-mono text-[11px] uppercase tracking-wide text-ink-soft shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:text-primary hover:shadow-none"
               >
                 {t(`tracker.columns.${status}`)}
                 <span className="text-steel-grey">{columns[status].length}</span>

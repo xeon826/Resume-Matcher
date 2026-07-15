@@ -1,6 +1,6 @@
 # Frontend Architecture
 
-> Next.js 15 + React 19 | TypeScript | Tailwind | Swiss International Style
+> Next.js 15 + React 19 | TypeScript | Tailwind | Dark Fintech design system
 
 ## Directory Structure
 
@@ -59,7 +59,7 @@ apps/frontend/
 
 **Button variants:** default (blue), destructive (red), success (green), warning (orange), outline, secondary
 
-**Styling:** `rounded-none`, hard shadows, `font-mono` for labels
+**Styling:** dark charcoal surfaces, gold primary, `rounded-md`/`rounded-lg`, soft-glow shadows, `font-sans` (Inter) + `font-mono` (Space Grotesk)
 
 ## Context Providers
 

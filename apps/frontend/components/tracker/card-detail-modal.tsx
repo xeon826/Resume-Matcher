@@ -102,7 +102,7 @@ export function CardDetailModal({
         ) : detail ? (
           <div className="space-y-4">
             <div className="flex items-center gap-2 font-mono text-xs uppercase text-ink-soft">
-              <span className="border border-black bg-paper-tint px-2 py-0.5">
+              <span className="border border-border bg-paper-tint px-2 py-0.5">
                 {t(`tracker.columns.${detail.status}`)}
               </span>
               {detail.applied_at && (
@@ -117,7 +117,7 @@ export function CardDetailModal({
 
             <div className="space-y-1">
               <Label>{t('tracker.modal.jobDescription')}</Label>
-              <div className="max-h-48 overflow-y-auto whitespace-pre-wrap border border-black bg-background p-3 text-sm">
+              <div className="max-h-48 overflow-y-auto whitespace-pre-wrap border border-border bg-background p-3 text-sm">
                 {detail.job_content || t('tracker.modal.noJobDescription')}
               </div>
             </div>

@@ -1,6 +1,6 @@
 # Components
 
-Concrete recipes for the building blocks of a Swiss-style interface. Every component here uses tokens defined in [tokens.md](tokens.md).
+Concrete recipes for the building blocks of a Dark Fintech interface. Every component here uses tokens defined in [tokens.md](tokens.md).
 
 > Sibling docs: [tokens](tokens.md) · [layouts](layouts.md) · [anti-patterns](anti-patterns.md)
 
@@ -8,18 +8,18 @@ Concrete recipes for the building blocks of a Swiss-style interface. Every compo
 
 ## Buttons
 
-Square corners, 2px black border, hard shadow, press-in hover.
+Rounded corners, gold fill (or the sunset gradient for heroes), dark text on gold for contrast, soft glow shadow.
 
 ```jsx
 <button className="
-  rounded-none
-  border-2 border-black
-  bg-blue-700 text-white
+  rounded-md
+  bg-primary text-primary-foreground
   px-4 py-2
-  font-mono uppercase tracking-wider text-sm
-  shadow-[2px_2px_0px_0px_#000000]
-  hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none
-  transition-none
+  font-sans text-sm font-medium
+  shadow-sw-sm
+  transition-colors
+  hover:brightness-110
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
 ">
   Submit
 </button>
@@ -29,18 +29,40 @@ Square corners, 2px black border, hard shadow, press-in hover.
 
 | Variant | Background | Text | When |
 |---------|------------|------|------|
-| Primary | `bg-blue-700` | white | Default action |
-| Success | `bg-green-700` | white | Confirm, save, download |
-| Destructive | `bg-red-600` | white | Delete, cancel-with-loss |
-| Warning | `bg-orange-500` | white | Risky but reversible |
-| Outline | transparent | black | Secondary actions |
+| Primary | `bg-primary` (gold `#F5C542`) | `text-primary-foreground` (dark) | Default action — **one per region** |
+| Gradient (sunset) | `.bg-gradient-sunset` | `text-card` (dark) | Hero / featured CTA only |
+| Secondary | `bg-secondary` | `text-secondary-foreground` | Secondary actions |
+| Outline | `bg-transparent border border-border` | `text-foreground` | Tertiary actions |
+| Destructive | `bg-destructive` | `text-white` | Delete, irreversible |
+| Ghost | `bg-transparent hover:bg-muted` | `text-foreground` | Toolbars, icon buttons |
 
-**Rule**: only one Primary button per logical screen region. If you find yourself adding a second, demote it to Outline.
+```jsx
+// Gradient hero CTA — coral → amber
+<button className="
+  rounded-md bg-gradient-sunset text-card
+  px-5 py-2.5 font-sans text-sm font-semibold
+  shadow-sw-sm transition-shadow hover:shadow-sw-card
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+">
+  Get Started
+</button>
+
+// Destructive
+<button className="
+  rounded-md bg-destructive text-white px-4 py-2 font-sans text-sm
+  shadow-sw-sm transition-colors hover:brightness-110
+">
+  Delete
+</button>
+```
+
+**Rule**: only one Primary (or gradient) button per logical screen region. If you find yourself adding a second, demote it to Secondary or Outline.
 
 ### Don't
 
-- Don't add `transition` curves — Swiss style is binary, not animated
-- Don't use icons inside buttons unless absolutely necessary; if you do, use a single mono-colored icon, never decorative
+- Don't use light-tint backgrounds on buttons (no `bg-white`, no `bg-gray-100`) — they fight the dark canvas.
+- Don't use the sunset gradient on every button; it loses impact. Reserve it for the single hero CTA.
+- Don't set borders to `border-black` — the dark system has no black borders. Use `border-border`.
 
 ---
 
@@ -50,33 +72,37 @@ Square corners, 2px black border, hard shadow, press-in hover.
 <input
   type="text"
   className="
-    rounded-none
-    border border-black
-    bg-white
+    rounded-md
+    border border-input
+    bg-card
     px-3 py-2
-    font-sans text-base
-    focus:outline-none focus:ring-1 focus:ring-blue-700
+    font-sans text-base text-foreground
+    placeholder:text-ink-soft
+    focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
+    transition-colors
   "
 />
 ```
 
-- 1px black border (not 2px — inputs are denser)
-- Focus state: 1px Hyper Blue ring, no glow
-- White background only (so they read as elevated against the canvas)
+- `rounded-md` (12px) corners
+- 1px `border-input` (`#3A3A42`)
+- Card-surface background (`bg-card`) so inputs read as recessed into the panel
+- Focus state: 2px gold ring (`ring-ring`), no glow halo beyond the ring
+- Placeholder text uses `text-ink-soft` (`#5C5C66`), the muted tier
 
 ### Labels
 
-Always paired with monospace uppercase labels:
+Labels use Space Grotesk (`font-mono`), sentence case (not uppercase):
 
 ```jsx
-<label className="font-mono text-sm uppercase tracking-wider mb-1 block">
+<label className="font-mono text-sm font-medium text-muted-foreground mb-1.5 block">
   Email Address
 </label>
 ```
 
 ### Textareas
 
-Same as inputs. If you're embedding textareas inside another keyboard-handled component (modals, command palettes, draggable cards), make sure Enter doesn't bubble up:
+Same treatment as inputs. If you're embedding textareas inside another keyboard-handled component (modals, command palettes, draggable cards), make sure Enter doesn't bubble up:
 
 ```tsx
 const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -90,20 +116,21 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 
 ```jsx
 <div className="
-  bg-white
-  border-2 border-black
-  rounded-none
-  shadow-[4px_4px_0px_0px_#000000]
+  bg-card text-card-foreground
+  border border-border
+  rounded-lg
+  shadow-sw-card
   p-6
 ">
-  <h2 className="font-serif text-2xl font-bold mb-4">Card Title</h2>
-  <p className="font-sans text-base">Card body content.</p>
+  <h2 className="font-sans text-2xl font-semibold mb-4">Card Title</h2>
+  <p className="font-sans text-base text-muted-foreground">Card body content.</p>
 </div>
 ```
 
-- 2px border (heavier than inputs because cards are anchors)
-- 4px shadow (heavier than buttons because they're stationary)
-- White background to lift off the canvas
+- `rounded-lg` (16px) corners
+- 1px `border-border` (the global default — `@apply border-border` is already on every element)
+- `shadow-sw-card` — the workhorse soft glow
+- Card surface (`#1C1C22`) is **darker** than the page (`#2B2B33`), so cards recess in
 
 ### Featured / hero cards
 
@@ -111,111 +138,138 @@ For the one or two most important cards on a page:
 
 ```jsx
 <div className="
-  bg-white
-  border-2 border-black
-  shadow-[8px_8px_0px_0px_#000000]
+  bg-card text-card-foreground
+  border border-border
+  rounded-xl
+  shadow-sw-lg
   p-8
 ">
 ```
 
-8px shadow signals "this is the headline element". Use sparingly.
+`rounded-xl` (20px) + `shadow-sw-lg` signals "this is the headline element". Use sparingly. A featured card may add a subtle gold top-accent or a faint sunset-tinted glow.
 
 ---
 
 ## Dialogs / Modals
 
 ```jsx
-<div className="
-  fixed inset-0 bg-black/30 flex items-center justify-center
-">
+<div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4">
   <div className="
     max-w-md w-full
-    bg-white
-    border-2 border-black
-    shadow-[4px_4px_0px_0px_#000000]
+    bg-popover text-popover-foreground
+    border border-border
+    rounded-xl
+    shadow-sw-xl
     p-6
   ">
-    <h2 className="font-serif text-2xl font-bold mb-4">Confirm</h2>
+    <h2 className="font-sans text-2xl font-semibold mb-4">Confirm</h2>
     {/* content */}
   </div>
 </div>
 ```
 
 - Centered, `max-w-md` by default (wider only if the form genuinely demands it)
-- Backdrop is `bg-black/30` — never blurred
-- The dialog itself is just a card with extra emphasis
+- Backdrop is `bg-black/60` — a dim scrim over the dark canvas; a light backdrop blur is acceptable for focus
+- The dialog uses the `popover` surface (`#212127`) with `rounded-xl` + `shadow-sw-xl` — it's the most elevated surface on screen
 
 ---
 
 ## Alerts
 
-Status alerts use the matching status color family. Border is always 2px in the status hue.
+Status alerts use translucent fills of the status token over the dark surface, with a matching border. **Never use light 100-tint backgrounds** (e.g. `bg-red-100`) — they blow out on dark. Use `/<opacity>` on the token.
 
 ```jsx
 // Danger
-<div className="bg-red-100 border-2 border-red-600 p-4">
-  <p className="font-mono uppercase text-sm font-bold text-red-600 mb-1">Error</p>
-  <p className="font-sans">Something went wrong.</p>
+<div className="rounded-lg border border-destructive/40 bg-destructive/10 p-4">
+  <p className="font-mono text-sm font-medium text-destructive mb-1">Error</p>
+  <p className="font-sans text-foreground">Something went wrong.</p>
 </div>
 
 // Warning
-<div className="bg-orange-100 border-2 border-orange-600 p-4">
+<div className="rounded-lg border border-warning/40 bg-warning/10 p-4">
+  <p className="font-mono text-sm font-medium text-warning mb-1">Heads up</p>
+  <p className="font-sans text-foreground">This action is reversible.</p>
+</div>
 
 // Success
-<div className="bg-green-100 border-2 border-green-700 p-4">
-
-// Info
-<div className="bg-blue-100 border-2 border-blue-700 p-4">
+<div className="rounded-lg border border-success/40 bg-success/10 p-4">
+  <p className="font-mono text-sm font-medium text-success mb-1">Saved</p>
+  <p className="font-sans text-foreground">Your changes are stored.</p>
+</div>
 ```
 
-The pattern is always: pale-100 background, 600/700 border and label.
+The pattern is always: **token/40 border + token/10 translucent fill + token-colored label**, with `rounded-lg`. Body text stays `text-foreground` for readability.
 
 ---
 
 ## Status Indicators
 
-A 12px square + a monospace uppercase label. No icons, no spinners, no animated dots.
+A small dot + a Space Grotesk label. Dots may be round (this system is soft, not hard-edged). Color encodes the state.
 
 ```jsx
-// Ready
+// Ready / healthy
 <div className="flex items-center gap-2">
-  <div className="w-3 h-3 bg-green-700" />
-  <span className="font-mono uppercase font-bold text-green-700">STATUS: READY</span>
+  <span className="w-2 h-2 rounded-full bg-success" />
+  <span className="font-mono text-xs font-medium text-success">READY</span>
 </div>
 
-// Setup Required
+// Needs attention
 <div className="flex items-center gap-2">
-  <div className="w-3 h-3 bg-orange-500" />
-  <span className="font-mono uppercase font-bold text-orange-500">STATUS: SETUP REQUIRED</span>
+  <span className="w-2 h-2 rounded-full bg-warning" />
+  <span className="font-mono text-xs font-medium text-warning">SETUP REQUIRED</span>
 </div>
 
 // Error
 <div className="flex items-center gap-2">
-  <div className="w-3 h-3 bg-red-600" />
-  <span className="font-mono uppercase font-bold text-red-600">STATUS: ERROR</span>
+  <span className="w-2 h-2 rounded-full bg-destructive" />
+  <span className="font-mono text-xs font-medium text-destructive">ERROR</span>
 </div>
 ```
 
-### Why squares, not circles?
+### Why dots here?
 
-Circles are decorative. Squares are structural. The whole pack is built on rejecting decorative geometry.
+The Dark Fintech system is intentionally soft and modern. Round status dots fit the rounded-corner ethos. (The prior sharp-edged system used squares — that rule no longer applies.)
+
+---
+
+## Badges & chips
+
+```jsx
+// Neutral chip
+<span className="rounded-sm bg-muted text-muted-foreground px-2 py-0.5 font-mono text-xs">
+  draft
+</span>
+
+// Gold badge (highlight)
+<span className="rounded-sm bg-primary/15 text-primary px-2 py-0.5 font-mono text-xs font-medium">
+  featured
+</span>
+```
+
+Use `rounded-sm` (8px) for small tags. For pill tags, `rounded-full` is acceptable.
 
 ---
 
 ## Quick reference snippets
 
 ```jsx
-// Swiss button
-<button className="rounded-none border-2 border-black bg-blue-700 text-white px-4 py-2 font-mono uppercase text-sm shadow-[2px_2px_0px_0px_#000000] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none">
+// Primary button (gold)
+<button className="rounded-md bg-primary text-primary-foreground px-4 py-2 font-sans text-sm shadow-sw-sm hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring">
 
-// Swiss card
-<div className="bg-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_#000000] p-6">
+// Gradient hero CTA (sunset)
+<button className="rounded-md bg-gradient-sunset text-card px-5 py-2.5 font-sans text-sm font-semibold shadow-sw-sm hover:shadow-sw-card">
 
-// Swiss label
-<label className="font-mono text-sm uppercase tracking-wider">
+// Card
+<div className="bg-card text-card-foreground border-border rounded-lg shadow-sw-card p-6">
 
-// Swiss section header
-<h2 className="font-serif text-2xl font-bold">
+// Label
+<label className="font-mono text-sm font-medium text-muted-foreground">
+
+// Section header
+<h2 className="font-sans text-2xl font-semibold">
+
+// Status dot
+<span className="w-2 h-2 rounded-full bg-success" />
 ```
 
 For composing these into pages, see [layouts.md](layouts.md).

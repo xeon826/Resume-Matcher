@@ -87,12 +87,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 
   return (
     <div
-      className={`space-y-0 border p-6 bg-white shadow-sw-default ${
-        isHidden ? 'border-dashed border-steel-grey opacity-60' : 'border-black'
+      className={`space-y-0 border p-6 bg-card shadow-sw-default ${
+        isHidden ? 'border-dashed border-border opacity-60' : 'border-border'
       }`}
     >
       {/* Section Header */}
-      <div className="flex justify-between items-center border-b border-black pb-2 mb-4">
+      <div className="flex justify-between items-center border-b border-border pb-2 mb-4">
         {/* Section Name (editable) */}
         <div className="flex items-center gap-2">
           {isEditing ? (
@@ -101,13 +101,13 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="h-8 w-48 rounded-none border-black font-serif text-lg font-bold"
+                className="h-8 w-48 rounded-md border-border font-sans text-lg font-bold"
                 autoFocus
               />
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 text-green-700 hover:text-green-800 hover:bg-green-50"
+                className="h-8 w-8 text-success hover:text-success hover:bg-success/10"
                 onClick={handleSaveEdit}
                 aria-label={t('common.save')}
                 title={t('common.save')}
@@ -127,7 +127,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             </div>
           ) : (
             <>
-              <h3 className="font-serif text-xl font-bold">{section.displayName}</h3>
+              <h3 className="font-sans text-xl font-bold">{section.displayName}</h3>
               {!isPersonalInfo && (
                 <Button
                   variant="ghost"
@@ -151,7 +151,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 </span>
               )}
               {isHidden && (
-                <span className="font-mono text-[10px] uppercase tracking-wider text-orange-600 bg-white px-1.5 py-0.5 border border-orange-500">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-warning bg-card px-1.5 py-0.5 border border-warning">
                   {t('builder.sectionHeader.hiddenFromPdfTag')}
                 </span>
               )}

@@ -7,12 +7,12 @@ import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/i18n';
 
 /**
- * Swiss International Style Dialog Component
+ * Dialog Component — Dark fintech / warm-sunset theme
  *
  * Native implementation without external dependencies.
- * - Square corners (rounded-none) - Brutalist aesthetic
- * - Black borders and hard shadows
- * - Canvas background (#F0F0E8)
+ * - Rounded corners (rounded-lg)
+ * - Subtle border (border-border) and soft glow shadow
+ * - Card surface background
  * - WCAG 2.2 AA: role="dialog", aria-modal, aria-labelledby wired to title
  */
 
@@ -147,8 +147,8 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
           aria-labelledby={titleId}
           className={cn(
             'relative w-full max-w-lg',
-            'border border-black bg-background shadow-sw-lg',
-            'rounded-none',
+            'border border-border bg-background shadow-sw-lg',
+            'rounded-lg',
             'animate-in fade-in-0 zoom-in-95 duration-200',
             className
           )}
@@ -157,7 +157,7 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
           {children}
           <button
             onClick={() => onOpenChange(false)}
-            className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
+            className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
           >
             <X className="h-5 w-5" />
             <span className="sr-only">{t('common.close')}</span>
@@ -218,7 +218,7 @@ interface DialogDescriptionProps {
 }
 
 const DialogDescription: React.FC<DialogDescriptionProps> = ({ className, children, ...props }) => (
-  <p className={cn('text-sm text-ink-soft', className)} {...props}>
+  <p className={cn('text-sm text-muted-foreground', className)} {...props}>
     {children}
   </p>
 );

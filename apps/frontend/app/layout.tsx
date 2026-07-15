@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Space_Grotesk } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './(default)/css/globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -8,8 +8,8 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
-const geist = Geist({
-  variable: '--font-geist',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-US" className="h-full" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${spaceGrotesk.variable} antialiased bg-background text-ink-soft min-h-full`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground min-h-full`}
       >
         {children}
       </body>

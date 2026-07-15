@@ -1,6 +1,6 @@
 # Layouts
 
-How to compose Swiss-style components into full pages. The system rewards mathematical grids and asymmetric balance over centered, decorative arrangements.
+How to compose Dark Fintech components into full pages. The spacing scale (4px-based) is unchanged, but all color, corner, and shadow references are updated for the dark charcoal / warm-sunset system.
 
 > Sibling docs: [tokens](tokens.md) · [components](components.md) · [anti-patterns](anti-patterns.md)
 
@@ -8,23 +8,23 @@ How to compose Swiss-style components into full pages. The system rewards mathem
 
 ## Grid systems
 
-Swiss design is grid-first. Pick a column count up front and stick to it.
+Grid-first composition. Pick a column count up front and stick to it.
 
 ### Dashboard / index grid
 
 ```jsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
   {items.map(item => <Card key={item.id} {...item} />)}
 </div>
 ```
 
-5-column on large screens is unusual on purpose — it creates the asymmetric rhythm the style is known for. 3- or 4-column also works; avoid 2-column for collections (too symmetric).
+2-column on tablet, 3-column on large screens is the standard rhythm. 4- or 5-column also works for dense metric grids; avoid 2-column for large collections on wide screens (wastes the canvas). Cards in the grid carry `rounded-lg`, `border-border`, and `shadow-sw-card`.
 
 ### Editor + preview split
 
 ```jsx
 <div className="flex h-full">
-  <div className="w-1/2 border-r-2 border-black">
+  <div className="w-1/2 border-r border-border">
     {/* editor */}
   </div>
   <div className="w-1/2">
@@ -33,13 +33,13 @@ Swiss design is grid-first. Pick a column count up front and stick to it.
 </div>
 ```
 
-The hard black divider is what makes this Swiss instead of generic. Don't use a thin grey divider — it weakens the structure.
+The divider is `border-border` (`#3A3A42`) — subtle on the charcoal canvas. Don't use a solid black divider (too heavy) or a brighter line (too noisy).
 
 ### Sidebar + content
 
 ```jsx
 <div className="flex h-full">
-  <aside className="w-64 border-r-2 border-black p-6">
+  <aside className="w-64 border-r border-border bg-sidebar p-6">
     {/* nav */}
   </aside>
   <main className="flex-1 p-8">
@@ -48,55 +48,57 @@ The hard black divider is what makes this Swiss instead of generic. Don't use a 
 </div>
 ```
 
-Fixed sidebar width (256px / `w-64`), fluid content. Resist the urge to make the sidebar collapsible with smooth animations — if it collapses, it snaps.
+Fixed sidebar width (256px / `w-64`), fluid content. The sidebar uses `bg-sidebar` (`#1C1C22`, same as cards) so it reads as a recessed rail next to the `bg-background` page. The active nav item uses `bg-primary`/`text-primary` or `text-sidebar-primary` to signal selection.
 
 ---
 
 ## Panel headers
 
-Each major panel gets a labeled header with a status square + monospace caption. This is a defining Swiss-style flourish.
+Each major panel gets a labeled header with a status dot + Space Grotesk caption.
 
 ```jsx
 // Editor panel
 <div className="flex items-center gap-2 mb-4">
-  <div className="w-3 h-3 bg-blue-700" />
-  <span className="font-mono text-xs uppercase tracking-wider">Editor Panel</span>
+  <span className="w-2 h-2 rounded-full bg-primary" />
+  <span className="font-mono text-xs text-muted-foreground">Editor Panel</span>
 </div>
 
 // Preview panel
 <div className="flex items-center gap-2 mb-4">
-  <div className="w-3 h-3 bg-green-700" />
-  <span className="font-mono text-xs uppercase tracking-wider">Live Preview</span>
+  <span className="w-2 h-2 rounded-full bg-success" />
+  <span className="font-mono text-xs text-muted-foreground">Live Preview</span>
 </div>
 ```
 
-The color of the square encodes the panel's role (input, output, status, etc.). Pick once per project and stay consistent.
+The dot color encodes the panel's role (input = gold, output = success, attention = warning, error = destructive). Pick once per project and stay consistent.
 
 ---
 
 ## Whitespace
 
-Asymmetric balance comes from **uneven** padding around content blocks.
+Good rhythm comes from **uneven** padding around content blocks — more air on one side than the other.
 
 ```jsx
-// Symmetric — feels generic
+// Flat — feels generic
 <div className="p-8">
   <h1>Title</h1>
   <p>Body</p>
 </div>
 
-// Asymmetric — feels Swiss
+// Directional — feels intentional
 <div className="pt-6 pb-12 pl-8 pr-16">
   <h1>Title</h1>
   <p>Body</p>
 </div>
 ```
 
-A common trick: **more whitespace on the right** than the left, **more on the bottom** than the top. It creates a directional weight that pulls the eye through the page.
+A common trick: **more whitespace on the right** than the left, **more on the bottom** than the top. It creates a directional weight that pulls the eye through the page. The 4px spacing scale is the same as before — see [tokens.md](tokens.md).
 
 ---
 
 ## Page dimensions (for print/PDF layouts)
+
+> **Scope note:** Resume render templates and print/PDF styling are a **separate light document system** with their own CSS modules. The dark tokens above do **not** apply to PDF output. This section covers only raw page-size math if you need it for browser-based PDF rendering.
 
 If you're targeting print, anchor on standard page sizes:
 
@@ -119,6 +121,8 @@ For browser-based PDF rendering (e.g., headless Chromium), set the page size on 
 }
 ```
 
+The print path forces a light background (`#FFFFFF` + `#000000` ink) regardless of the dark app theme — that override lives in `globals.css` `@media print` and must not be removed.
+
 ---
 
 ## Typography rhythm
@@ -126,11 +130,30 @@ For browser-based PDF rendering (e.g., headless Chromium), set the page size on 
 Headers should sit **closer** to the content they introduce than to the content above them. The default browser margins do the opposite — fix this.
 
 ```jsx
-<h2 className="font-serif text-2xl font-bold mt-12 mb-2">Section Title</h2>
-<p className="font-sans">Content directly under the header.</p>
+<h2 className="font-sans text-2xl font-semibold mt-12 mb-2">Section Title</h2>
+<p className="font-sans text-muted-foreground">Content directly under the header.</p>
 ```
 
-`mt-12 mb-2` (asymmetric vertical) is the default; reach for it instinctively.
+`mt-12 mb-2` (asymmetric vertical) is the default; reach for it instinctively. Headers are Inter semibold; supporting copy drops to `text-muted-foreground` for a clean two-tier hierarchy.
+
+---
+
+## Featured / hero sections
+
+The hero region is where the sunset gradient earns its place — a gradient headline, a gradient CTA, or a subtle gradient-tinted glow behind the headline card.
+
+```jsx
+<section className="px-8 py-16">
+  <h1 className="font-sans text-5xl font-bold tracking-tight">
+    Build a <span className="text-gradient-sunset">resume</span> that gets noticed
+  </h1>
+  <button className="mt-6 rounded-md bg-gradient-sunset text-card px-5 py-2.5 font-sans text-sm font-semibold shadow-sw-card">
+    Get Started
+  </button>
+</section>
+```
+
+Keep the gradient to one focal element per screen. If the headline uses `.text-gradient-sunset`, the CTA below it should be solid gold (`bg-primary`), not also gradient.
 
 ---
 
@@ -138,7 +161,7 @@ Headers should sit **closer** to the content they introduce than to the content 
 
 See [anti-patterns.md](anti-patterns.md) for the full list. The layout-specific ones:
 
-- Don't center everything — Swiss style is left-aligned by default
-- Don't use card carousels — show the grid
-- Don't soften dividers — borders are 1–2px black, never grey
-- Don't animate panel transitions — they snap
+- Don't use solid-black dividers — `border-border` (`#3A3A42`) is the only panel divider
+- Don't light-fill sidebars/panels — use `bg-card`/`bg-sidebar` (recessed), not `bg-white`
+- Don't overload the sunset gradient — one focal element per screen
+- Don't flatten cards by removing their shadow — `shadow-sw-card` is what makes them read as elevated on charcoal

@@ -10,7 +10,7 @@ Each pack lives in its own folder. Cross-references inside a pack are relative a
 
 | Pack | What it covers |
 |------|----------------|
-| [swiss-design-system/](swiss-design-system/) | Swiss International Style design system — tokens, components, layouts, AI prompt template, anti-patterns |
+| [swiss-design-system/](swiss-design-system/) | Dark Fintech design system — tokens, components, layouts, AI prompt template, anti-patterns |
 | [nextjs-performance/](nextjs-performance/) | Next.js 15 performance optimizations — waterfalls, bundle size, Server Action security, server-side perf, pre-PR checklist |
 
 ---

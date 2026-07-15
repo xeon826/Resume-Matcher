@@ -17,14 +17,14 @@ export function OutreachPreview({ content, className }: OutreachPreviewProps) {
   return (
     <div
       className={cn(
-        'bg-white border-2 border-black',
+        'bg-card border-2 border-border',
         'shadow-sw-default',
         'overflow-hidden',
         className
       )}
     >
       {/* Preview Header */}
-      <div className="p-4 border-b-2 border-black bg-[#F5F5F0]">
+      <div className="p-4 border-b-2 border-border bg-muted">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Linkedin className="w-4 h-4 text-[#0077B5]" />
@@ -46,7 +46,7 @@ export function OutreachPreview({ content, className }: OutreachPreviewProps) {
         {content ? (
           <div className="space-y-4">
             {/* Message Bubble Style */}
-            <div className="bg-[#F5F5F0] border-2 border-black p-4 shadow-sw-sm">
+            <div className="bg-muted border-2 border-border p-4 shadow-sw-sm">
               <p className="font-sans text-sm leading-relaxed whitespace-pre-wrap">{content}</p>
             </div>
 

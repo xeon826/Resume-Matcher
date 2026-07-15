@@ -79,9 +79,9 @@ const PROVIDERS: LLMProvider[] = [
 ];
 
 const SEGMENTED_BUTTON_BASE =
-  'border border-black font-mono transition-all duration-150 ease-out shadow-sw-sm hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none disabled:cursor-not-allowed disabled:opacity-50';
-const SEGMENTED_BUTTON_ACTIVE = 'bg-blue-700 text-white border-black hover:bg-blue-800';
-const SEGMENTED_BUTTON_INACTIVE = 'bg-white text-black hover:bg-secondary';
+  'border border-border font-mono transition-all duration-150 ease-out shadow-sw-sm hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none disabled:cursor-not-allowed disabled:opacity-50';
+const SEGMENTED_BUTTON_ACTIVE = 'bg-primary text-foreground border-border hover:bg-primary/90';
+const SEGMENTED_BUTTON_INACTIVE = 'bg-card text-foreground hover:bg-muted';
 
 const unwrapCodeBlock = (value?: string | null): string | null => {
   if (!value) return null;
@@ -633,11 +633,11 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col items-center justify-start p-6 md:p-12 min-h-screen overflow-y-auto">
-      <div className="w-full max-w-4xl border border-black bg-background shadow-sw-lg">
+      <div className="w-full max-w-4xl border border-border bg-background shadow-sw-lg">
         {/* Header */}
-        <div className="border-b border-black p-8 bg-white flex justify-between items-start">
+        <div className="border-b border-border p-8 bg-card flex justify-between items-start">
           <div>
-            <h1 className="font-serif text-3xl font-bold tracking-tight uppercase">
+            <h1 className="font-sans text-3xl font-bold tracking-tight uppercase">
               {t('settings.title')}
             </h1>
             <p className="font-mono text-xs text-steel-grey mt-2 uppercase tracking-wider">
@@ -673,7 +673,7 @@ export default function SettingsPage() {
 
           {/* System Status Panel */}
           <section className="space-y-4">
-            <div className="flex items-center justify-between border-b border-black/10 pb-2">
+            <div className="flex items-center justify-between border-b border-border/10 pb-2">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <Activity className="w-4 h-4" />
@@ -729,18 +729,18 @@ export default function SettingsPage() {
               <div className="@container">
                 <div className="grid grid-cols-2 @3xl:grid-cols-4 gap-4">
                   {/* LLM Status */}
-                  <div className="border border-black bg-white p-4 shadow-sw-sm">
+                  <div className="border border-border bg-card p-4 shadow-sw-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <Server className="w-4 h-4 text-steel-grey" />
-                      <span className="font-mono text-xs uppercase text-steel-grey">
+                      <Server className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-mono text-xs uppercase text-muted-foreground">
                         {t('settings.statusCards.llm')}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       {systemStatus.llm_healthy ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <CheckCircle2 className="w-5 h-5 text-success" />
                       ) : (
-                        <XCircle className="w-5 h-5 text-red-500" />
+                        <XCircle className="w-5 h-5 text-destructive" />
                       )}
                       <span className="font-mono text-sm font-bold">
                         {systemStatus.llm_healthy
@@ -751,15 +751,15 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Database Status */}
-                  <div className="border border-black bg-white p-4 shadow-sw-sm">
+                  <div className="border border-border bg-card p-4 shadow-sw-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <Database className="w-4 h-4 text-steel-grey" />
-                      <span className="font-mono text-xs uppercase text-steel-grey">
+                      <Database className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-mono text-xs uppercase text-muted-foreground">
                         {t('settings.statusCards.database')}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                      <CheckCircle2 className="w-5 h-5 text-success" />
                       <span className="font-mono text-sm font-bold">
                         {t('settings.statusValues.connected')}
                       </span>
@@ -767,10 +767,10 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Resumes Count */}
-                  <div className="border border-black bg-white p-4 shadow-sw-sm">
+                  <div className="border border-border bg-card p-4 shadow-sw-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <FileText className="w-4 h-4 text-steel-grey" />
-                      <span className="font-mono text-xs uppercase text-steel-grey">
+                      <FileText className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-mono text-xs uppercase text-muted-foreground">
                         {t('settings.statusCards.resumes')}
                       </span>
                     </div>
@@ -780,10 +780,10 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Jobs Count */}
-                  <div className="border border-black bg-white p-4 shadow-sw-sm">
+                  <div className="border border-border bg-card p-4 shadow-sw-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <Briefcase className="w-4 h-4 text-steel-grey" />
-                      <span className="font-mono text-xs uppercase text-steel-grey">
+                      <Briefcase className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-mono text-xs uppercase text-muted-foreground">
                         {t('settings.statusCards.jobs')}
                       </span>
                     </div>
@@ -798,10 +798,10 @@ export default function SettingsPage() {
             {/* Additional Stats Row */}
             {systemStatus && (
               <div className="grid grid-cols-2 gap-4">
-                <div className="border border-black bg-white p-4 shadow-sw-sm">
+                <div className="border border-border bg-card p-4 shadow-sw-sm">
                   <div className="flex items-center gap-2 mb-2">
-                    <Sparkles className="w-4 h-4 text-steel-grey" />
-                    <span className="font-mono text-xs uppercase text-steel-grey">
+                    <Sparkles className="w-4 h-4 text-muted-foreground" />
+                    <span className="font-mono text-xs uppercase text-muted-foreground">
                       {t('settings.statusCards.improvements')}
                     </span>
                   </div>
@@ -809,24 +809,24 @@ export default function SettingsPage() {
                     {systemStatus.database_stats.total_improvements}
                   </span>
                 </div>
-                <div className="border border-black bg-white p-4 shadow-sw-sm">
+                <div className="border border-border bg-card p-4 shadow-sw-sm">
                   <div className="flex items-center gap-2 mb-2">
-                    <FileText className="w-4 h-4 text-steel-grey" />
-                    <span className="font-mono text-xs uppercase text-steel-grey">
+                    <FileText className="w-4 h-4 text-muted-foreground" />
+                    <span className="font-mono text-xs uppercase text-muted-foreground">
                       {t('settings.statusCards.masterResume')}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     {systemStatus.has_master_resume ? (
                       <>
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <CheckCircle2 className="w-5 h-5 text-success" />
                         <span className="font-mono text-sm font-bold">
                           {t('settings.statusValues.configured')}
                         </span>
                       </>
                     ) : (
                       <>
-                        <XCircle className="w-5 h-5 text-amber-500" />
+                        <XCircle className="w-5 h-5 text-warning" />
                         <span className="font-mono text-sm font-bold">
                           {t('settings.statusValues.notSet')}
                         </span>
@@ -840,7 +840,7 @@ export default function SettingsPage() {
 
           {/* LLM Configuration */}
           <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-black/10 pb-2">
+            <div className="flex items-center gap-2 border-b border-border/10 pb-2">
               <Key className="w-4 h-4" />
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
                 {t('settings.llmConfigurationTitle')}
@@ -923,10 +923,10 @@ export default function SettingsPage() {
               </div>
 
               {/* Saved per-provider keys — each provider keeps its own encrypted
-                  key, so switching providers never wipes another's. */}
+                   key, so switching providers never wipes another's. */}
               {apiKeyStatuses.some((s) => s.configured) && (
-                <div className="space-y-2 border border-black bg-paper-tint p-3 shadow-sw-xs">
-                  <p className="font-mono text-xs uppercase tracking-wide text-ink-soft">
+                <div className="space-y-2 border border-border bg-muted p-3 shadow-sw-xs">
+                  <p className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                     {t('settings.apiKeys.savedTitle')}
                   </p>
                   <ul className="space-y-1.5">
@@ -942,7 +942,7 @@ export default function SettingsPage() {
                             <span className="font-medium">
                               {API_KEY_PROVIDER_INFO[s.provider]?.name ?? s.provider}
                             </span>
-                            <span className="font-mono text-xs text-steel-grey">
+                            <span className="font-mono text-xs text-muted-foreground">
                               {s.masked_key}
                             </span>
                           </span>
@@ -972,7 +972,7 @@ export default function SettingsPage() {
                   placeholder={t('settings.llmConfiguration.baseUrlPlaceholder')}
                   className="font-mono"
                 />
-                <p className="text-xs text-steel-grey font-mono">
+                <p className="text-xs text-muted-foreground font-mono">
                   {t('settings.llmConfiguration.baseUrlDescription')}
                 </p>
               </div>
@@ -995,7 +995,7 @@ export default function SettingsPage() {
                     { id: 'high', label: t('settings.llmConfiguration.reasoningEffortHigh') },
                   ]}
                 />
-                <p className="text-xs text-steel-grey font-mono">
+                <p className="text-xs text-muted-foreground font-mono">
                   {t('settings.llmConfiguration.reasoningEffortDescription')}
                 </p>
               </div>
@@ -1115,7 +1115,7 @@ export default function SettingsPage() {
 
           {/* Content Generation Section */}
           <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-black/10 pb-2">
+            <div className="flex items-center gap-2 border-b border-border/10 pb-2">
               <Settings2 className="w-4 h-4" />
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
                 {t('settings.contentGeneration.title')}
@@ -1123,7 +1123,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="space-y-2">
-              <p className="text-sm text-ink-soft mb-4">
+              <p className="text-sm text-muted-foreground mb-4">
                 {t('settings.contentGeneration.description')}
               </p>
 
@@ -1149,9 +1149,9 @@ export default function SettingsPage() {
                       value={coverLetterPrompt}
                       onChange={(e) => setCoverLetterPrompt(e.target.value)}
                       placeholder={coverLetterDefault}
-                      className="w-full rounded-none border border-black bg-white p-3 font-mono text-xs break-words focus:outline-none focus:shadow-[4px_4px_0_0_#000]"
+                      className="w-full rounded-md border border-border bg-card p-3 font-mono text-xs break-words focus:outline-none focus:shadow-[4px_4px_0_0_#000]"
                     />
-                    <p className="text-xs text-steel-grey font-mono">
+                    <p className="text-xs text-muted-foreground font-mono">
                       {t('settings.contentGeneration.customPromptHelp')}
                     </p>
                     {featurePromptError?.field === 'cover_letter_prompt' && (
@@ -1206,9 +1206,9 @@ export default function SettingsPage() {
                       value={outreachPrompt}
                       onChange={(e) => setOutreachPrompt(e.target.value)}
                       placeholder={outreachDefault}
-                      className="w-full rounded-none border border-black bg-white p-3 font-mono text-xs break-words focus:outline-none focus:shadow-[4px_4px_0_0_#000]"
+                      className="w-full rounded-md border border-border bg-card p-3 font-mono text-xs break-words focus:outline-none focus:shadow-[4px_4px_0_0_#000]"
                     />
-                    <p className="text-xs text-steel-grey font-mono">
+                    <p className="text-xs text-muted-foreground font-mono">
                       {t('settings.contentGeneration.customPromptHelp')}
                     </p>
                     {featurePromptError?.field === 'outreach_message_prompt' && (

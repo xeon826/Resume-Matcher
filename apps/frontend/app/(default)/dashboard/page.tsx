@@ -261,15 +261,15 @@ export default function DashboardPage() {
         return {
           text: t('dashboard.status.processing'),
           icon: <Loader2 className="w-3 h-3 animate-spin" />,
-          color: 'text-blue-700',
+          color: 'text-primary',
         };
       case 'ready':
-        return { text: t('dashboard.status.ready'), icon: null, color: 'text-green-700' };
+        return { text: t('dashboard.status.ready'), icon: null, color: 'text-success' };
       case 'failed':
         return {
           text: t('dashboard.status.failed'),
           icon: <AlertCircle className="w-3 h-3" />,
-          color: 'text-red-600',
+          color: 'text-destructive',
         };
       default:
         return { text: t('dashboard.status.pending'), icon: null, color: 'text-steel-grey' };
@@ -419,7 +419,7 @@ export default function DashboardPage() {
           >
             <div className="flex-1 flex flex-col h-full">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-16 h-16 border-2 border-black bg-blue-700 text-white flex items-center justify-center">
+                <div className="w-16 h-16 border-2 border-border bg-primary text-foreground flex items-center justify-center">
                   <span className="font-mono font-bold text-lg">M</span>
                 </div>
                 <div className="flex gap-1">
@@ -428,7 +428,7 @@ export default function DashboardPage() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 hover:bg-blue-100 hover:text-blue-700 z-10 rounded-none relative"
+                        className="h-8 w-8 hover:bg-muted hover:text-primary z-10 rounded-md relative"
                         onClick={handleRetryProcessing}
                         disabled={isRetrying}
                         aria-label={t('dashboard.retryProcessing')}
@@ -461,7 +461,7 @@ export default function DashboardPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="text-xs h-7 rounded-none border-black"
+                      className="text-xs h-7 rounded-md border-border"
                       onClick={handleRetryProcessing}
                       disabled={isRetrying}
                     >
@@ -472,7 +472,7 @@ export default function DashboardPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="text-xs h-7 rounded-none border-red-600 text-red-600 hover:bg-red-50"
+                      className="text-xs h-7 rounded-md border-destructive text-destructive hover:bg-destructive/10"
                       onClick={handleDeleteAndReupload}
                     >
                       {t('dashboard.deleteAndReupload')}
@@ -499,7 +499,7 @@ export default function DashboardPage() {
               <div className="flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-6">
                   <div
-                    className="w-12 h-12 border-2 border-black flex items-center justify-center"
+                    className="w-12 h-12 border-2 border-border flex items-center justify-center"
                     style={{ backgroundColor: color.bg, color: color.fg }}
                   >
                     <span className="font-mono font-bold">{getMonogram(title)}</span>
@@ -509,7 +509,7 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <CardTitle className="text-lg">
-                  <span className="block font-serif text-base font-bold leading-tight mb-1 w-full line-clamp-2">
+                  <span className="block font-sans text-base font-bold leading-tight mb-1 w-full line-clamp-2">
                     {title}
                   </span>
                 </CardTitle>
@@ -529,11 +529,11 @@ export default function DashboardPage() {
             <Button
               onClick={() => router.push('/tailor')}
               disabled={!isTailorEnabled}
-              className="w-20 h-20 bg-blue-700 text-white border-2 border-black shadow-sw-default hover:bg-blue-800 hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-none transition-all rounded-none"
+              className="w-20 h-20 bg-primary text-foreground border-2 border-border shadow-sw-default hover:bg-primary/90 hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-none transition-all rounded-md"
             >
               <Plus className="w-8 h-8" />
             </Button>
-            <p className="text-xs font-mono mt-4 uppercase text-green-700">
+            <p className="text-xs font-mono mt-4 uppercase text-success">
               {t('dashboard.createResume')}
             </p>
           </div>

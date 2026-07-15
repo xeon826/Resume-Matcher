@@ -45,7 +45,7 @@ export function CoverLetterPreview({
   return (
     <div
       className={cn(
-        'bg-white border-2 border-black',
+        'bg-card border-2 border-border',
         'shadow-sw-default',
         'overflow-hidden',
         className
@@ -59,8 +59,8 @@ export function CoverLetterPreview({
         }}
       >
         {/* Header - Personal Info */}
-        <header className="mb-8 border-b-2 border-black pb-4">
-          <h1 className="font-serif text-2xl font-bold tracking-tight">
+        <header className="mb-8 border-b-2 border-border pb-4">
+          <h1 className="font-sans text-2xl font-bold tracking-tight">
             {personalInfo.name || t('coverLetter.preview.defaultName')}
           </h1>
           <div className="mt-2 font-mono text-xs text-ink-soft flex flex-wrap gap-x-4 gap-y-1">

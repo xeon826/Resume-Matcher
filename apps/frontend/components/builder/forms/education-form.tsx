@@ -93,14 +93,14 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
           variant="outline"
           size="sm"
           onClick={handleAdd}
-          className="rounded-none border-black hover:bg-black hover:text-white transition-colors"
+          className="rounded-md border-border hover:bg-foreground hover:text-background transition-colors"
         >
           <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.education.addSchool')}
         </Button>
       </div>
 
       {data.length === 0 ? (
-        <div className="text-center py-12 bg-paper-tint border border-dashed border-black">
+        <div className="text-center py-12 bg-paper-tint border border-dashed border-border">
           <p className="font-mono text-sm text-steel-grey mb-4">
             {t('builder.genericItemForm.noEntries', { label: t('resume.sections.education') })}
           </p>
@@ -108,7 +108,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
             variant="outline"
             size="sm"
             onClick={handleAdd}
-            className="rounded-none border-black"
+            className="rounded-md border-border"
           >
             <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.education.addFirstSchool')}
           </Button>
@@ -122,7 +122,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
             <div className="space-y-8">
               {data.map((item) => (
                 <DraggableListItem key={item.id} id={item.id}>
-                  <div className="p-6 border border-black bg-paper-tint relative group">
+                  <div className="p-6 border border-border bg-paper-tint relative group rounded-md">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -143,7 +143,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
                           value={item.institution || ''}
                           onChange={(e) => handleChange(item.id, 'institution', e.target.value)}
                           placeholder={t('builder.forms.education.placeholders.institution')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                       <div className="space-y-2">
@@ -154,7 +154,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
                           value={item.degree || ''}
                           onChange={(e) => handleChange(item.id, 'degree', e.target.value)}
                           placeholder={t('builder.forms.education.placeholders.degree')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                       <div className="space-y-2">
@@ -165,7 +165,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
                           value={item.years || ''}
                           onChange={(e) => handleChange(item.id, 'years', e.target.value)}
                           placeholder={t('builder.forms.education.placeholders.years')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                     </div>
@@ -177,7 +177,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ data, onChange }) 
                       <Textarea
                         value={item.description || ''}
                         onChange={(e) => handleChange(item.id, 'description', e.target.value)}
-                        className="min-h-[60px] text-black text-sm rounded-none border-black bg-white"
+                        className="min-h-[60px] text-foreground text-sm rounded-md border-border bg-card"
                         placeholder={t('builder.forms.education.placeholders.description')}
                       />
                     </div>

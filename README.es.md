@@ -20,10 +20,10 @@ Esperamos convertir esto en **el VS Code para crear currículums**.
 
 <div align="center">
 
-![Stars](https://img.shields.io/github/stars/srbhr/Resume-Matcher?labelColor=F0F0E8&style=for-the-badge&color=1d4ed8)
-![Apache 2.0](https://img.shields.io/github/license/srbhr/Resume-Matcher?labelColor=F0F0E8&style=for-the-badge&color=1d4ed8) ![Forks](https://img.shields.io/github/forks/srbhr/Resume-Matcher?labelColor=F0F0E8&style=for-the-badge&color=1d4ed8) ![version](https://img.shields.io/badge/Version-1.2%20Nightvision-FFF?labelColor=F0F0E8&style=for-the-badge&color=1d4ed8)
+![Stars](https://img.shields.io/github/stars/srbhr/Resume-Matcher?labelColor=1c1c22&style=for-the-badge&color=f5c542)
+![Apache 2.0](https://img.shields.io/github/license/srbhr/Resume-Matcher?labelColor=1c1c22&style=for-the-badge&color=f5c542) ![Forks](https://img.shields.io/github/forks/srbhr/Resume-Matcher?labelColor=1c1c22&style=for-the-badge&color=f5c542) ![version](https://img.shields.io/badge/Version-1.2%20Nightvision-FFF?labelColor=1c1c22&style=for-the-badge&color=f5c542)
 
-[![Discord](https://img.shields.io/discord/1122069176962531400?labelColor=F0F0E8&logo=discord&logoColor=1d4ed8&style=for-the-badge&color=1d4ed8)](https://dsc.gg/resume-matcher) [![Website](https://img.shields.io/badge/website-Resume%20Matcher-FFF?labelColor=F0F0E8&style=for-the-badge&color=1d4ed8)](https://resumematcher.fyi) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Resume%20Matcher-FFF?labelColor=F0F0E8&logo=LinkedIn&style=for-the-badge&color=1d4ed8)](https://www.linkedin.com/company/resume-matcher/)
+[![Discord](https://img.shields.io/discord/1122069176962531400?labelColor=1c1c22&logo=discord&logoColor=f5c542&style=for-the-badge&color=f5c542)](https://dsc.gg/resume-matcher) [![Website](https://img.shields.io/badge/website-Resume%20Matcher-FFF?labelColor=1c1c22&style=for-the-badge&color=f5c542)](https://resumematcher.fyi) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Resume%20Matcher-FFF?labelColor=1c1c22&logo=LinkedIn&style=for-the-badge&color=f5c542)](https://www.linkedin.com/company/resume-matcher/)
 
 <a href="https://trendshift.io/repositories/565" target="_blank"><img src="https://trendshift.io/api/badge/repositories/565" alt="srbhr%2FResume-Matcher | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
@@ -37,7 +37,7 @@ Esperamos convertir esto en **el VS Code para crear currículums**.
 
 <div align="center">
 
-[![Sponsor on GitHub](https://img.shields.io/github/sponsors/srbhr?style=for-the-badge&label=Sponsor&color=1d4ed8&labelColor=F0F0E8&logo=github&logoColor=black)](https://github.com/sponsors/srbhr) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&color=1d4ed8&labelColor=F0F0E8&logoColor=black)](https://www.buymeacoffee.com/srbhr)
+[![Sponsor on GitHub](https://img.shields.io/github/sponsors/srbhr?style=for-the-badge&label=Sponsor&color=f5c542&labelColor=1c1c22&logo=github&logoColor=black)](https://github.com/sponsors/srbhr) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&color=f5c542&labelColor=1c1c22&logoColor=black)](https://www.buymeacoffee.com/srbhr)
 
 **¿Patrocinas en nombre de una empresa?** Coloca tu logo ante más de 27k desarrolladores → **[conviértete en patrocinador ↓](#sponsors)**
 
@@ -103,8 +103,8 @@ Cada aporte mantiene Resume Matcher gratis y financia nuevas funciones — y rec
 
 | Plataforma  | Enlace |
 |-----------|--------|
-| GitHub | [![GitHub Sponsors](https://img.shields.io/github/sponsors/srbhr?style=for-the-badge&color=1d4ed8&labelColor=F0F0E8&logo=github&logoColor=black)](https://github.com/sponsors/srbhr) |
-| Buy Me a Coffee | [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&color=1d4ed8&labelColor=F0F0E8&logoColor=black)](https://www.buymeacoffee.com/srbhr) |
+| GitHub | [![GitHub Sponsors](https://img.shields.io/github/sponsors/srbhr?style=for-the-badge&color=f5c542&labelColor=1c1c22&logo=github&logoColor=black)](https://github.com/sponsors/srbhr) |
+| Buy Me a Coffee | [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&color=f5c542&labelColor=1c1c22&logoColor=black)](https://www.buymeacoffee.com/srbhr) |
 
 ## Nota del Creador
 
@@ -248,7 +248,7 @@ docker run srbhr/resume-matcher:latest
 | Backend | FastAPI, Python 3.13+, LiteLLM |
 | Frontend | Next.js 15, React 19, TypeScript |
 | Base de datos | TinyDB (almacenamiento en archivo JSON) |
-| Estilos | Tailwind CSS 4, Swiss International Style |
+| Estilos | Tailwind CSS 4, sistema de diseño Dark Fintech |
 | PDF | Chromium headless vía Playwright |
 
 ## Únete y contribuye

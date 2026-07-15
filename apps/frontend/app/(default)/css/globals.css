@@ -4,8 +4,9 @@
 @source "../../../{app,components,hooks,lib,messages}/**/*.{js,ts,jsx,tsx,mdx}";
 
 @theme inline {
-  /* No --radius-* tokens — Swiss style commits to rounded-none everywhere.
-     Dead tokens removed. */
+  /* Dark fintech / warm-sunset theme. Radius tokens are introduced here
+     (the previous system defined none); the dark system uses rounded
+     corners for a softer, modern fintech feel. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -38,32 +39,44 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Swiss Style brand tokens. --color-primary, --color-destructive,
+  /* Dark fintech brand tokens. --color-primary, --color-destructive,
      --color-secondary, --color-background already exist above via the
-     legacy var(--xxx) chain — these are only the additional brand
-     semantics that didn't exist as @theme tokens before. */
-  --color-canvas: #f0f0e8;
-  --color-ink: #000000;
-  --color-success: #15803d;
-  --color-warning: #f97316;
+     legacy var(--xxx) chain — these map to the dark surface + warm gold
+     accent palette. */
+  --color-canvas: #2b2b33;
+  --color-ink: #ffffff; /* inverted from black — primary text on dark */
+  --color-success: #3ddc97; /* fresh green for genuine success states */
+  --color-warning: #f7d488; /* pale gold — fits the warm palette */
 
-  /* Brand-tinted neutrals (OKLCH, chroma tinted ~0.005-0.018 toward
-     Hyper Blue hue 264) — replace ad-hoc Tailwind grays. */
-  --color-paper-tint: oklch(96% 0.005 264); /* replaces gray-50/100/200 */
-  --color-steel-grey: oklch(64% 0.012 264); /* replaces gray-300/400/500 */
-  --color-ink-soft: oklch(38% 0.018 264); /* replaces gray-600/700/800/900 */
+  /* Neutrals repurposed for dark surfaces. Components reference these by
+     class name (bg-paper-tint, text-steel-grey, text-ink-soft); values
+     are remapped so the existing utility classes resolve sensibly on dark. */
+  --color-paper-tint: #2a2a2a; /* elevated surface / hover (was lightest gray) */
+  --color-steel-grey: #9b9ba5; /* secondary text (was mid gray) */
+  --color-ink-soft: #5c5c66; /* muted text/icons (was dark gray) */
 
-  /* Hard offset shadows in solid ink — Swiss style commits to no blur.
-     Sized small (1px) through xl (12px) for Hero/featured surfaces. */
-  --shadow-sw-xs: 1px 1px 0px 0px #000000;
-  --shadow-sw-sm: 2px 2px 0px 0px #000000;
-  --shadow-sw-default: 4px 4px 0px 0px #000000;
-  --shadow-sw-card: 6px 6px 0px 0px #000000;
-  --shadow-sw-lg: 8px 8px 0px 0px #000000;
-  --shadow-sw-xl: 12px 12px 0px 0px #000000;
+  /* Soft glow shadows — dark, blurred, no solid black. The --shadow-sw-*
+     token NAMES are retained (~31 components reference them); only the
+     values change. Sized xs (1px) through xl (12px) of blur. */
+  --shadow-sw-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sw-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-sw-default: 0 4px 10px rgba(0, 0, 0, 0.35);
+  --shadow-sw-card: 0 6px 16px rgba(0, 0, 0, 0.4);
+  --shadow-sw-lg: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-sw-xl: 0 12px 32px rgba(0, 0, 0, 0.5);
 
-  /* Fonts */
-  --font-sans: 'Geist Sans', sans-serif;
+  /* Radius tokens — introduced for the dark fintech system. */
+  --radius-sm: 0.5rem; /* 8px — badges, chips */
+  --radius-md: 0.75rem; /* 12px — buttons, inputs */
+  --radius-lg: 1rem; /* 16px — cards, panels */
+  --radius-xl: 1.25rem; /* 20px — featured, modals */
+  --radius-2xl: 1.5rem; /* 24px */
+
+  /* Fonts — Inter drives both sans and serif (the serif→Inter mapping is a
+     safety net so legacy font-serif components render Inter rather than a
+     system serif). Space Grotesk stays the mono/digits font. */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Inter', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
 
   /* Animations */
@@ -77,57 +90,58 @@
 }
 
 :root {
-  --font-mono: 'Geist Mono', monospace;
-  --font-sans: 'Geist', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --font-sans: 'Inter', sans-serif;
 
-  /* Swiss International Style Palette */
-  --background: #f0f0e8; /* Canvas */
-  --foreground: #000000; /* Ink */
+  /* Dark fintech / warm-sunset palette.
+     Charcoal surfaces, white ink, gold primary, coral + amber accents. */
+  --background: #2b2b33; /* page */
+  --foreground: #ffffff; /* primary text */
 
-  --card: #f0f0e8;
-  --card-foreground: #000000;
+  --card: #1c1c22; /* card surface */
+  --card-foreground: #ffffff;
 
-  --popover: #f0f0e8;
-  --popover-foreground: #000000;
+  --popover: #212127; /* popover/menu surface */
+  --popover-foreground: #ffffff;
 
-  --primary: #1d4ed8; /* Hyper Blue */
-  --primary-foreground: #ffffff;
+  --primary: #f5c542; /* gold — solid primary for buttons/highlights */
+  --primary-foreground: #1c1c22; /* dark text on gold for contrast */
 
-  --secondary: #e5e5e0; /* Panel Grey */
-  --secondary-foreground: #000000;
+  --secondary: #212127;
+  --secondary-foreground: #ffffff;
 
-  --muted: #e5e5e0;
-  --muted-foreground: #6b7280;
+  --muted: #2a2a2a; /* muted surface (hover/nested) */
+  --muted-foreground: #9b9ba5; /* secondary text/labels */
 
-  --accent: #e5e5e0;
-  --accent-foreground: #000000;
+  --accent: #2a2a2a;
+  --accent-foreground: #ffffff;
 
-  --destructive: #dc2626; /* Alert Red */
+  --destructive: #e14b4b; /* alert red */
   --destructive-foreground: #ffffff;
 
-  --border: #000000;
-  --input: #f0f0e8;
-  --ring: #1d4ed8;
+  --border: #3a3a42; /* subtle 1px borders */
+  --input: #3a3a42;
+  --ring: #f5c542; /* gold focus ring */
 
-  --chart-1: #1d4ed8;
-  --chart-2: #15803d;
-  --chart-3: #f97316;
-  --chart-4: #dc2626;
-  --chart-5: #000000;
+  --chart-1: #f5c542;
+  --chart-2: #f56b3f;
+  --chart-3: #ffd65c;
+  --chart-4: #e14b4b;
+  --chart-5: #9b9ba5;
 
-  --sidebar: #e5e5e0;
-  --sidebar-foreground: #000000;
-  --sidebar-primary: #1d4ed8;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #d8d8d2;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #000000;
-  --sidebar-ring: #1d4ed8;
+  --sidebar: #1c1c22;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #f5c542;
+  --sidebar-primary-foreground: #1c1c22;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #3a3a42;
+  --sidebar-ring: #f5c542;
 }
 
-/* Light theme only — Swiss/Brutalist works on the warm Canvas background.
-   The half-finished dark mode mapping was removed; .impeccable.md commits
-   to light only. */
+/* Dark fintech / warm-sunset theme — charcoal surfaces, white ink, gold
+   primary, coral + amber accents. Single dark theme (the previous light
+   palette was superseded by this rebrand). */
 
 @layer base {
   * {
@@ -139,6 +153,21 @@
   /* The global `button { font-family: var(--font-mono) }` rule was removed.
      The Button component applies font-mono via its Tailwind classes, and the
      global rule was leaking into nested text inside <button> elements. */
+}
+
+/* ============================================
+   GRADIENT UTILITIES — warm sunset (coral → amber)
+   Use for primary CTAs / featured accents.
+   ============================================ */
+.bg-gradient-sunset {
+  background-image: linear-gradient(135deg, #f56b3f 0%, #ffd65c 100%);
+}
+
+.text-gradient-sunset {
+  color: transparent;
+  background-image: linear-gradient(135deg, #f56b3f 0%, #ffd65c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 @media print {

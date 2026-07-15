@@ -62,16 +62,16 @@ export function JDComparisonView({ jobDescription, resumeData }: JDComparisonVie
   return (
     <div className="h-full flex flex-col">
       {/* Stats Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-paper-tint">
+      <div className="flex items-center justify-between px-4 py-3 bg-card border-b border-paper-tint">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Target className="w-4 h-4 text-blue-600" />
+            <Target className="w-4 h-4 text-primary" />
             <span className="text-sm font-mono">
               {t('builder.jdMatch.stats.keywordsExtracted', { count: keywords.size })}
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-green-600" />
+            <CheckCircle className="w-4 h-4 text-success" />
             <span className="text-sm font-mono">
               {t('builder.jdMatch.stats.matchesFound', { count: stats.matchCount })}
             </span>
@@ -84,10 +84,10 @@ export function JDComparisonView({ jobDescription, resumeData }: JDComparisonVie
           <span
             className={`text-lg font-bold ${
               stats.matchPercentage >= 50
-                ? 'text-green-600'
+                ? 'text-success'
                 : stats.matchPercentage >= 30
-                  ? 'text-yellow-600'
-                  : 'text-red-600'
+                  ? 'text-warning'
+                  : 'text-destructive'
             }`}
           >
             {stats.matchPercentage}%

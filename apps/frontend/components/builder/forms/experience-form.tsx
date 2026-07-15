@@ -143,14 +143,14 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
           variant="outline"
           size="sm"
           onClick={handleAdd}
-          className="rounded-none border-black hover:bg-black hover:text-white transition-colors"
+          className="rounded-md border-border hover:bg-foreground hover:text-background transition-colors"
         >
           <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.experience.addJob')}
         </Button>
       </div>
 
       {data.length === 0 ? (
-        <div className="text-center py-12 bg-paper-tint border border-dashed border-black">
+        <div className="text-center py-12 bg-paper-tint border border-dashed border-border">
           <p className="font-mono text-sm text-steel-grey mb-4">
             {t('builder.genericItemForm.noEntries', { label: t('resume.sections.experience') })}
           </p>
@@ -158,7 +158,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
             variant="outline"
             size="sm"
             onClick={handleAdd}
-            className="rounded-none border-black"
+            className="rounded-md border-border"
           >
             <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.experience.addFirstJob')}
           </Button>
@@ -172,7 +172,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
             <div className="space-y-8">
               {data.map((item) => (
                 <DraggableListItem key={item.id} id={item.id}>
-                  <div className="p-6 border border-black bg-paper-tint relative group">
+                  <div className="p-6 border border-border bg-paper-tint relative group rounded-md">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -193,7 +193,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
                           value={item.title || ''}
                           onChange={(e) => handleChange(item.id, 'title', e.target.value)}
                           placeholder={t('builder.forms.experience.placeholders.jobTitle')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                       <div className="space-y-2">
@@ -204,7 +204,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
                           value={item.company || ''}
                           onChange={(e) => handleChange(item.id, 'company', e.target.value)}
                           placeholder={t('builder.forms.experience.placeholders.company')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                       <div className="space-y-2">
@@ -215,7 +215,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
                           value={item.location || ''}
                           onChange={(e) => handleChange(item.id, 'location', e.target.value)}
                           placeholder={t('builder.forms.experience.placeholders.location')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                       <div className="space-y-2">
@@ -226,7 +226,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
                           value={item.years || ''}
                           onChange={(e) => handleChange(item.id, 'years', e.target.value)}
                           placeholder={t('builder.forms.experience.placeholders.years')}
-                          className="rounded-none border-black bg-white"
+                          className="rounded-md border-border bg-card"
                         />
                       </div>
                     </div>
@@ -240,7 +240,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }
                           variant="ghost"
                           size="sm"
                           onClick={() => handleAddDescription(item.id)}
-                          className="h-6 text-xs text-blue-700 hover:text-blue-800 hover:bg-blue-50"
+                          className="h-6 text-xs text-primary hover:text-primary hover:bg-primary/10"
                         >
                           <Plus className="w-3 h-3 mr-1" />{' '}
                           {t('builder.genericItemForm.actions.addPoint')}

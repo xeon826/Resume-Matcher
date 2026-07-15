@@ -31,7 +31,7 @@ export function KanbanColumn({
 
   return (
     <div className="flex h-full w-80 shrink-0 flex-col p-3">
-      <div className="mb-2 flex items-center justify-between border-b-2 border-black pb-1">
+      <div className="mb-2 flex items-center justify-between border-b-2 border-border pb-1">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wide text-ink">
           {t(`tracker.columns.${status}`)}
         </h2>

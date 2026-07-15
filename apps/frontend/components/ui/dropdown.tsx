@@ -61,12 +61,12 @@ export function Dropdown({
   return (
     <div className={`space-y-1 ${className}`} ref={containerRef}>
       {label && (
-        <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block">
+        <label className="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground block">
           {label}
         </label>
       )}
 
-      {description && <p className="text-sm text-ink-soft">{description}</p>}
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
 
       <div className="relative">
         {/* Trigger Button.
@@ -83,12 +83,12 @@ export function Dropdown({
           aria-expanded={isOpen}
           aria-controls={isOpen ? menuId : undefined}
           aria-label={label}
-          className="w-full flex items-center justify-between border border-black bg-white px-4 py-3 font-mono text-sm transition-all duration-150 ease-out shadow-sw-sm hover:shadow-none hover:translate-y-[2px] hover:translate-x-[2px] disabled:opacity-50 disabled:cursor-not-allowed rounded-none"
+          className="w-full flex items-center justify-between border border-border bg-card px-4 py-3 font-mono text-sm transition-colors duration-150 ease-out shadow-sw-sm hover:bg-paper-tint disabled:opacity-50 disabled:cursor-not-allowed rounded-md text-foreground"
         >
           <div className="flex-1 text-left min-w-0">
             {selectedOption ? (
               <div>
-                <div className="font-bold text-black truncate">{selectedOption.label}</div>
+                <div className="font-bold text-foreground truncate">{selectedOption.label}</div>
                 {selectedOption.description && (
                   <div className="text-xs text-steel-grey mt-1 font-normal truncate">
                     {selectedOption.description}
@@ -118,7 +118,7 @@ export function Dropdown({
             id={menuId}
             role="menu"
             aria-label={label}
-            className="absolute top-full left-0 right-0 mt-1 z-50 border border-black bg-white shadow-sw-default rounded-none"
+            className="absolute top-full left-0 right-0 mt-1 z-50 border border-border bg-popover shadow-sw-default rounded-lg"
           >
             <div className="max-h-64 overflow-y-auto">
               {options.map((option, index) => (
@@ -127,11 +127,11 @@ export function Dropdown({
                     role="menuitemradio"
                     aria-checked={option.id === value}
                     onClick={() => handleSelect(option.id)}
-                    className={`w-full px-4 py-3 text-left font-mono transition-colors duration-150 border border-black ${
+                    className={`w-full px-4 py-3 text-left font-mono transition-colors duration-150 border-b border-border ${
                       option.id === value
-                        ? 'bg-green-700 text-white'
-                        : 'bg-white text-black hover:bg-paper-tint'
-                    } ${index > 0 ? '-mt-[1px]' : ''} active:bg-paper-tint`}
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-transparent text-foreground hover:bg-paper-tint'
+                    } ${index === options.length - 1 ? 'border-b-0' : ''} active:bg-paper-tint`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">

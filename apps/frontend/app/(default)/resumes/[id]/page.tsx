@@ -285,8 +285,8 @@ export default function ResumeViewerPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background">
-        <Loader2 className="w-10 h-10 animate-spin text-blue-700 mb-4" />
-        <p className="font-mono text-sm font-bold uppercase text-blue-700">
+        <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
+        <p className="font-mono text-sm font-bold uppercase text-primary">
           {t('resumeViewer.loading')}
         </p>
       </div>
@@ -303,24 +303,24 @@ export default function ResumeViewerPage() {
           <div
             className={`border p-6 text-center max-w-md shadow-sw-default ${
               isProcessing
-                ? 'bg-blue-50 border-blue-200'
+                ? 'bg-primary/10 border-primary/20'
                 : isFailed
-                  ? 'bg-orange-50 border-orange-200'
-                  : 'bg-red-50 border-red-200'
+                  ? 'bg-warning/10 border-warning/20'
+                  : 'bg-destructive/10 border-destructive/20'
             }`}
           >
             <div className="flex justify-center mb-4">
               {isProcessing ? (
-                <Loader2 className="w-8 h-8 animate-spin text-blue-700" />
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
               ) : isFailed ? (
-                <AlertCircle className="w-8 h-8 text-orange-600" />
+                <AlertCircle className="w-8 h-8 text-warning" />
               ) : (
-                <AlertCircle className="w-8 h-8 text-red-600" />
+                <AlertCircle className="w-8 h-8 text-destructive" />
               )}
             </div>
             <p
               className={`font-bold mb-4 ${
-                isProcessing ? 'text-blue-700' : isFailed ? 'text-orange-700' : 'text-red-700'
+                isProcessing ? 'text-primary' : isFailed ? 'text-warning' : 'text-destructive'
               }`}
             >
               {error || t('resumeViewer.resumeNotFound')}
@@ -401,7 +401,7 @@ export default function ResumeViewerPage() {
                 autoFocus
                 maxLength={80}
                 placeholder={t('resumeViewer.titlePlaceholder')}
-                className="font-serif text-2xl font-bold border-b-2 border-black bg-transparent outline-none w-full max-w-xl px-0 py-1"
+                className="font-sans text-2xl font-bold border-b-2 border-border bg-transparent outline-none w-full max-w-xl px-0 py-1 rounded-md"
               />
             ) : (
               <button
@@ -412,7 +412,7 @@ export default function ResumeViewerPage() {
                 className="group flex items-center gap-2 cursor-pointer bg-transparent border-none p-0"
               >
                 <h2
-                  className={`font-serif text-2xl font-bold border-b-2 border-transparent group-hover:border-black transition-colors ${!resumeTitle ? 'text-steel-grey' : ''}`}
+                  className={`font-sans text-2xl font-bold border-b-2 border-transparent group-hover:border-border transition-colors ${!resumeTitle ? 'text-muted-foreground' : ''}`}
                 >
                   {resumeTitle || t('resumeViewer.titlePlaceholder')}
                 </h2>
@@ -426,7 +426,7 @@ export default function ResumeViewerPage() {
 
         {/* Resume Viewer */}
         <div className="flex justify-center pb-4">
-          <div className="resume-print w-full max-w-[250mm] shadow-sw-lg border-2 border-black bg-white">
+          <div className="resume-print w-full max-w-[250mm] shadow-sw-lg border-2 border-border bg-card">
             <Resume
               resumeData={localizedResumeData || resumeData}
               additionalSectionLabels={{
