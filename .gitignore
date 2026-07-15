@@ -57,11 +57,7 @@ apps/backend/data/config.json
 .cursor/
 .cursorrules
 
-# Claude Code — track only CLAUDE.md and settings.json, ignore everything else
-# (skills, subagents, thoughts, prompts, sessions are all personal workflow)
-.claude/*
-!.claude/CLAUDE.md
-!.claude/settings.json
+# Claude Code / AI assistant artifacts (personal workflow)
 skills-lock.json
 
 # AI assistant tool folders (personal workflow, not tracked)

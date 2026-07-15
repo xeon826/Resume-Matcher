@@ -1,6 +1,6 @@
-# CLAUDE.md - Frontend (apps/frontend)
+# AGENTS.md - Frontend (apps/frontend)
 
-> Frontend deep-dive for Claude Code. Read the repo-root [`.claude/CLAUDE.md`](../../.claude/CLAUDE.md) and [`docs/agent/README.md`](../../docs/agent/README.md) first for project-wide context. This file goes deeper on the Next.js app only.
+> Frontend deep-dive for opencode. Read the repo-root [`AGENTS.md`](../../AGENTS.md) and [`docs/agent/README.md`](../../docs/agent/README.md) first for project-wide context. This file goes deeper on the Next.js app only.
 
 **Stack:** Next.js 16 (App Router, Turbopack) · React 19 · TypeScript (strict) · Tailwind CSS v4 · no UI framework (hand-rolled `components/ui`). Import alias `@/*` → `apps/frontend/*`.
 

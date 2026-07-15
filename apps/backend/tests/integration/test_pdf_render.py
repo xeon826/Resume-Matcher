@@ -187,7 +187,7 @@ class TestRenderPageWaitStrategy:
 
 
 class TestPlaywrightErrorMapping:
-    """#811 + info-disclosure (CLAUDE.md rule 5): the catch-all must NOT leak raw
+    """#811 + info-disclosure (AGENTS.md rule 5): the catch-all must NOT leak raw
     Playwright internals (call log, internal navigation URLs) to the client;
     curated, safe messages must be preserved.
     """

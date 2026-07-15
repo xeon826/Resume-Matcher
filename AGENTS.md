@@ -1,6 +1,6 @@
-# CLAUDE.md - Resume Matcher
+# AGENTS.md - Resume Matcher
 
-> **Context file for Claude Code.** Full documentation at [docs/agent/README.md](../docs/agent/README.md).
+> **Context file for opencode.** Full documentation at [docs/agent/README.md](docs/agent/README.md).
 
 ---
 
@@ -19,13 +19,13 @@ Resume Matcher is an AI-powered application for tailoring resumes to job descrip
 
 ## First Steps
 
-Before exploring code, read [docs/agent/README.md](../docs/agent/README.md) for project orientation.
+Before exploring code, read [docs/agent/README.md](docs/agent/README.md) for project orientation.
 
 ---
 
 ## Non-Negotiable Rules
 
-1. **All frontend UI changes** MUST follow [Swiss International Style](../docs/portable/swiss-design-system/README.md) — see [tokens](../docs/portable/swiss-design-system/tokens.md), [components](../docs/portable/swiss-design-system/components.md), [anti-patterns](../docs/portable/swiss-design-system/anti-patterns.md)
+1. **All frontend UI changes** MUST follow [Swiss International Style](docs/portable/swiss-design-system/README.md) — see [tokens](docs/portable/swiss-design-system/tokens.md), [components](docs/portable/swiss-design-system/components.md), [anti-patterns](docs/portable/swiss-design-system/anti-patterns.md)
 2. **All Python functions** MUST have type hints
 3. **Run `npm run lint`** before committing frontend changes
 4. **Run `npm run format`** (Prettier) before committing
@@ -92,33 +92,33 @@ apps/
 ## Documentation by Task
 
 ### For Backend Changes
-1. [Backend guide](../docs/agent/architecture/backend-guide.md) - Architecture, modules, services
-2. [API contracts](../docs/agent/apis/front-end-apis.md) - API specifications
-3. [LLM integration](../docs/agent/llm-integration.md) - Multi-provider AI support
+1. [Backend guide](docs/agent/architecture/backend-guide.md) - Architecture, modules, services
+2. [API contracts](docs/agent/apis/front-end-apis.md) - API specifications
+3. [LLM integration](docs/agent/llm-integration.md) - Multi-provider AI support
 
 ### For Frontend Changes
-1. [Frontend workflow](../docs/agent/architecture/frontend-workflow.md) - User flow, components
-2. [Swiss design system pack](../docs/portable/swiss-design-system/README.md) - **REQUIRED** Swiss International Style (portable pack)
-3. [Next.js performance pack](../docs/portable/nextjs-performance/README.md) - **REQUIRED** Next.js 15 perf patterns (portable pack)
-4. [Coding standards](../docs/agent/coding-standards.md) - Frontend conventions
+1. [Frontend workflow](docs/agent/architecture/frontend-workflow.md) - User flow, components
+2. [Swiss design system pack](docs/portable/swiss-design-system/README.md) - **REQUIRED** Swiss International Style (portable pack)
+3. [Next.js performance pack](docs/portable/nextjs-performance/README.md) - **REQUIRED** Next.js 15 perf patterns (portable pack)
+4. [Coding standards](docs/agent/coding-standards.md) - Frontend conventions
 
 ### For Testing
-1. [Testing strategy](../docs/agent/testing-strategy.md) - Current-state assessment, framework, phased plan, how to run + how we verify (anti-theater)
+1. [Testing strategy](docs/agent/testing-strategy.md) - Current-state assessment, framework, phased plan, how to run + how we verify (anti-theater)
 
 ### For Template/PDF Changes
-1. [PDF template guide](../docs/agent/design/pdf-template-guide.md) - PDF rendering
-2. [Template system](../docs/agent/design/template-system.md) - Resume templates
-3. [Resume templates](../docs/agent/features/resume-templates.md) - Template types & controls
+1. [PDF template guide](docs/agent/design/pdf-template-guide.md) - PDF rendering
+2. [Template system](docs/agent/design/template-system.md) - Resume templates
+3. [Resume templates](docs/agent/features/resume-templates.md) - Template types & controls
 
 ### For Features
 | Feature | Documentation |
 |---------|---------------|
-| Application tracker | [application-tracker.md](../docs/agent/features/application-tracker.md) |
-| Custom sections | [custom-sections.md](../docs/agent/features/custom-sections.md) |
-| Resume templates | [resume-templates.md](../docs/agent/features/resume-templates.md) |
-| i18n | [i18n.md](../docs/agent/features/i18n.md) |
-| AI enrichment | [enrichment.md](../docs/agent/features/enrichment.md) |
-| JD matching | [jd-match.md](../docs/agent/features/jd-match.md) |
+| Application tracker | [application-tracker.md](docs/agent/features/application-tracker.md) |
+| Custom sections | [custom-sections.md](docs/agent/features/custom-sections.md) |
+| Resume templates | [resume-templates.md](docs/agent/features/resume-templates.md) |
+| i18n | [i18n.md](docs/agent/features/i18n.md) |
+| AI enrichment | [enrichment.md](docs/agent/features/enrichment.md) |
+| JD matching | [jd-match.md](docs/agent/features/jd-match.md) |
 
 ---
 
@@ -151,7 +151,7 @@ data = copy.deepcopy(DEFAULT_DATA)  # Correct
 
 ## Testing
 
-Both apps have real test suites, and **tests are in scope** (deliberate testing initiative — full plan in [docs/agent/testing-strategy.md](../docs/agent/testing-strategy.md)).
+Both apps have real test suites, and **tests are in scope** (deliberate testing initiative — full plan in [docs/agent/testing-strategy.md](docs/agent/testing-strategy.md)).
 
 | Suite | Stack | Run |
 |-------|-------|-----|
@@ -159,7 +159,7 @@ Both apps have real test suites, and **tests are in scope** (deliberate testing 
 | Frontend | vitest + Testing Library (jsdom) | `cd apps/frontend && npm run test` |
 
 - **Backend layers:** `tests/unit` (pure logic), `tests/service` (mocked LLM), `tests/integration` (real routers via httpx ASGI), `tests/evals` (prompt-quality scorers + a gated LLM-judge — excluded by default; run with `uv run pytest -m eval`).
-- **Local push gate (not CI):** a `pre-push` hook (`.githooks/pre-push`) runs the backend suite + a locale-parity check and **blocks red pushes**. Activate once per clone: `git config core.hooksPath .githooks`. We deliberately avoid a GitHub Actions PR gate (high external-PR volume) — see [`.githooks/README.md`](../.githooks/README.md).
+- **Local push gate (not CI):** a `pre-push` hook (`.githooks/pre-push`) runs the backend suite + a locale-parity check and **blocks red pushes**. Activate once per clone: `git config core.hooksPath .githooks`. We deliberately avoid a GitHub Actions PR gate (high external-PR volume) — see [`.githooks/README.md`](.githooks/README.md).
 - Keep tests **deterministic and anti-theater**: a test must fail when its target breaks, and the default suites make no real network/LLM calls.
 
 ---
@@ -205,4 +205,4 @@ Do NOT modify without explicit request:
 
 ---
 
-> **Full agent documentation**: [docs/agent/README.md](../docs/agent/README.md)
+> **Full agent documentation**: [docs/agent/README.md](docs/agent/README.md)

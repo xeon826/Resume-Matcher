@@ -246,7 +246,7 @@ def _raise_playwright_error(error: PlaywrightError, url: str) -> NoReturn:
         ) from error
     # Catch-all: the raw Playwright message can carry internal navigation URLs
     # and a full call log. Log it server-side; return a generic message to the
-    # client (CLAUDE.md rule 5 — and it stops the verbose trace from overflowing
+    # client (AGENTS.md rule 5 — and it stops the verbose trace from overflowing
     # the client error modal, #811).
     logger.error("PDF rendering failed for %s: %s", url, error_msg)
     raise PDFRenderError(
