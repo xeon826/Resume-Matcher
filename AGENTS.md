@@ -31,6 +31,7 @@ Before exploring code, read [docs/agent/README.md](docs/agent/README.md) for pro
 4. **Run `npm run format`** (Prettier) before committing
 5. **Log detailed errors server-side**, return generic messages to clients
 6. **Do NOT modify** `.github/workflows/` files without explicit request
+7. **Keep `AGENTS.md` current.** When you make notable changes (new features, endpoints, modules, schema/prompt changes, architecture or stack shifts), update the relevant `AGENTS.md`: [`apps/backend/AGENTS.md`](apps/backend/AGENTS.md) for backend work, [`apps/frontend/AGENTS.md`](apps/frontend/AGENTS.md) for frontend work, or this root `AGENTS.md` for project-wide changes.
 
 ---
 
@@ -192,6 +193,7 @@ Before completing a task:
 - [ ] Python functions have type hints
 - [ ] Schema/prompt changes documented
 - [ ] New behavior covered by a deterministic test (it must fail if the behavior breaks)
+- [ ] Relevant `AGENTS.md` updated (backend / frontend / root) if the change is notable
 
 ---
 
