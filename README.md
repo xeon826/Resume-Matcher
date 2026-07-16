@@ -10,6 +10,8 @@
 
 The AI harness to build tailored resumes for each job application with Claude, ChatGPT, DeepSeek, Kimi, GLM, Gemma, and other LLMs. Supports both local and remote LLMs.
 
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build 
+
 ![Resume Matcher Demo](assets/Resume_Matcher_Demo_2.gif)
 
 </div>
