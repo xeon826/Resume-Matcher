@@ -12,7 +12,7 @@ const RichTextEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="min-h-[100px] border border-black bg-transparent" aria-busy="true" />
+      <div className="min-h-[100px] border border-border bg-transparent" aria-busy="true" />
     ),
   }
 );
@@ -229,7 +229,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
         ))}
 
         {data.length === 0 && (
-          <div className="text-center py-12 bg-paper-tint border border-dashed border-black">
+          <div className="text-center py-12 bg-paper-tint border border-dashed border-border">
             <p className="font-mono text-sm text-steel-grey mb-4">
               {t('builder.genericItemForm.noEntries', { label: t('resume.sections.projects') })}
             </p>
@@ -237,7 +237,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ data, onChange }) =>
               variant="outline"
               size="sm"
               onClick={handleAdd}
-              className="rounded-none border-black"
+              className="rounded-none border-border"
             >
               <Plus className="w-4 h-4 mr-2" /> {t('builder.forms.projects.addFirstProject')}
             </Button>

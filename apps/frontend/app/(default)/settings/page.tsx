@@ -656,14 +656,14 @@ export default function SettingsPage() {
         <div className="p-8 space-y-10">
           {/* API Key Not Configured Warning */}
           {!statusLoading && systemStatus && !systemStatus.llm_configured && (
-            <div className="border-2 border-amber-500 bg-amber-50 p-4 shadow-sw-default">
+            <div className="border-2 border-warning bg-warning/10 p-4 shadow-sw-default">
               <div className="flex items-start gap-3">
-                <div className="w-3 h-3 bg-amber-500 mt-1 shrink-0"></div>
+                <div className="w-3 h-3 bg-warning mt-1 shrink-0"></div>
                 <div className="flex-1">
-                  <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
+                  <p className="font-mono text-sm font-bold uppercase tracking-wider text-warning">
                     {t('settings.setupRequired.title')}
                   </p>
-                  <p className="font-mono text-xs text-amber-700 mt-1">
+                  <p className="font-mono text-xs text-warning mt-1">
                     {t('settings.setupRequired.description')}
                   </p>
                 </div>
@@ -705,8 +705,8 @@ export default function SettingsPage() {
                 <Loader2 className="w-6 h-6 animate-spin text-steel-grey" />
               </div>
             ) : !systemStatus ? (
-              <div className="flex flex-col items-center justify-center p-8 gap-3 border border-dashed border-red-300 bg-red-50">
-                <p className="font-mono text-xs text-red-600 uppercase">
+              <div className="flex flex-col items-center justify-center p-8 gap-3 border border-dashed border-destructive/40 bg-destructive/10">
+                <p className="font-mono text-xs text-destructive uppercase">
                   {t('settings.systemStatus.unableToConnect')}
                 </p>
                 <p className="font-mono text-xs text-ink-soft">
@@ -1039,8 +1039,8 @@ export default function SettingsPage() {
 
               {/* Error Message */}
               {error && (
-                <div className="border border-red-300 bg-red-50 p-3">
-                  <p className="text-xs text-red-600 font-mono break-words">
+                <div className="border border-destructive/40 bg-destructive/10 p-3">
+                  <p className="text-xs text-destructive font-mono break-words">
                     {t('settings.llmConfiguration.errorPrefix', { error })}
                   </p>
                 </div>
@@ -1051,15 +1051,15 @@ export default function SettingsPage() {
                 <div
                   className={`border p-4 break-words ${
                     healthCheck.healthy
-                      ? 'border-green-300 bg-green-50'
-                      : 'border-red-300 bg-red-50'
+                      ? 'border-success/30 bg-success/10'
+                      : 'border-destructive/30 bg-destructive/10'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     {healthCheck.healthy ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                      <CheckCircle2 className="w-5 h-5 text-success" />
                     ) : (
-                      <XCircle className="w-5 h-5 text-red-500" />
+                      <XCircle className="w-5 h-5 text-destructive" />
                     )}
                     <span className="font-mono text-sm font-bold">
                       {healthCheck.healthy
@@ -1074,12 +1074,12 @@ export default function SettingsPage() {
                     })}
                   </p>
                   {healthCheckError && (
-                    <p className="font-mono text-xs text-red-600 mt-1 break-words">
+                    <p className="font-mono text-xs text-destructive mt-1 break-words">
                       {healthCheckError}
                     </p>
                   )}
                   {healthCheckWarning && (
-                    <p className="font-mono text-xs text-amber-700 mt-1 break-words">
+                    <p className="font-mono text-xs text-warning mt-1 break-words">
                       {healthCheckWarning}
                     </p>
                   )}
@@ -1088,10 +1088,10 @@ export default function SettingsPage() {
                       {healthDetailItems.map((item) =>
                         item.key === 'reasoningContent' ? (
                           <details key={item.key} className="group">
-                            <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-wider text-ink-soft hover:text-black">
+                            <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-wider text-ink-soft hover:text-foreground">
                               {item.label}
                             </summary>
-                            <pre className="mt-1 whitespace-pre-wrap break-words rounded-none border border-black bg-white p-3 text-xs text-ink-soft shadow-sw-sm">
+                            <pre className="mt-1 whitespace-pre-wrap break-words rounded-none border border-border bg-paper-tint p-3 text-xs text-ink-soft shadow-sw-sm">
                               {item.value}
                             </pre>
                           </details>
@@ -1100,7 +1100,7 @@ export default function SettingsPage() {
                             <p className="font-mono text-[10px] uppercase tracking-wider text-ink-soft">
                               {item.label}
                             </p>
-                            <pre className="mt-1 whitespace-pre-wrap break-words rounded-none border border-black bg-white p-3 text-xs text-ink-soft shadow-sw-sm">
+                            <pre className="mt-1 whitespace-pre-wrap break-words rounded-none border border-border bg-paper-tint p-3 text-xs text-ink-soft shadow-sw-sm">
                               {item.value}
                             </pre>
                           </div>
@@ -1155,7 +1155,7 @@ export default function SettingsPage() {
                       {t('settings.contentGeneration.customPromptHelp')}
                     </p>
                     {featurePromptError?.field === 'cover_letter_prompt' && (
-                      <p className="text-xs text-red-600 font-mono break-words">
+                      <p className="text-xs text-destructive font-mono break-words">
                         {t('settings.contentGeneration.customPromptErrorMissing', {
                           missing: featurePromptError.missing.join(', '),
                         })}
@@ -1212,7 +1212,7 @@ export default function SettingsPage() {
                       {t('settings.contentGeneration.customPromptHelp')}
                     </p>
                     {featurePromptError?.field === 'outreach_message_prompt' && (
-                      <p className="text-xs text-red-600 font-mono break-words">
+                      <p className="text-xs text-destructive font-mono break-words">
                         {t('settings.contentGeneration.customPromptErrorMissing', {
                           missing: featurePromptError.missing.join(', '),
                         })}
@@ -1269,7 +1269,7 @@ export default function SettingsPage() {
 
           {/* Language Settings Section */}
           <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-black/10 pb-2">
+            <div className="flex items-center gap-2 border-b border-border pb-2">
               <Globe className="w-4 h-4" />
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
                 {t('settings.uiLanguage')} & {t('settings.contentLanguage')}
@@ -1331,25 +1331,27 @@ export default function SettingsPage() {
 
           {/* Danger Zone */}
           <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-red-200 pb-2">
-              <AlertTriangle className="w-4 h-4 text-red-600" />
-              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-red-600">
+            <div className="flex items-center gap-2 border-b border-destructive/30 pb-2">
+              <AlertTriangle className="w-4 h-4 text-destructive" />
+              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-destructive">
                 {t('settings.dangerZone')}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Clear API Keys */}
-              <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
+              <div className="border border-destructive/30 bg-destructive/5 p-6 space-y-4">
                 <div>
-                  <h3 className="font-bold text-sm text-red-900 mb-1">
+                  <h3 className="font-bold text-sm text-destructive mb-1">
                     {t('settings.clearApiKeys')}
                   </h3>
-                  <p className="text-xs text-red-700">{t('settings.clearApiKeysDescription')}</p>
+                  <p className="text-xs text-destructive">
+                    {t('settings.clearApiKeysDescription')}
+                  </p>
                 </div>
                 <Button
                   variant="outline"
-                  className="w-full border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800 hover:border-red-300"
+                  className="w-full border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive hover:border-destructive/40"
                   onClick={() => setShowClearApiKeysDialog(true)}
                   disabled={isResetting}
                 >
@@ -1359,12 +1361,14 @@ export default function SettingsPage() {
               </div>
 
               {/* Reset Database */}
-              <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
+              <div className="border border-destructive/30 bg-destructive/5 p-6 space-y-4">
                 <div>
-                  <h3 className="font-bold text-sm text-red-900 mb-1">
+                  <h3 className="font-bold text-sm text-destructive mb-1">
                     {t('settings.resetDatabase')}
                   </h3>
-                  <p className="text-xs text-red-700">{t('settings.resetDatabaseDescription')}</p>
+                  <p className="text-xs text-destructive">
+                    {t('settings.resetDatabaseDescription')}
+                  </p>
                 </div>
                 <Button
                   variant="destructive"
@@ -1381,7 +1385,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Footer */}
-        <div className="bg-secondary p-4 border-t border-black flex justify-between items-center">
+        <div className="bg-secondary p-4 border-t border-border flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Image
               src="/logo.svg"
@@ -1405,10 +1409,10 @@ export default function SettingsPage() {
             ) : systemStatus ? (
               <>
                 <div
-                  className={`w-3 h-3 ${systemStatus.status === 'ready' ? 'bg-green-700' : 'bg-amber-500'}`}
+                  className={`w-3 h-3 ${systemStatus.status === 'ready' ? 'bg-success' : 'bg-warning'}`}
                 ></div>
                 <span
-                  className={`font-mono text-xs font-bold ${systemStatus.status === 'ready' ? 'text-green-700' : 'text-amber-600'}`}
+                  className={`font-mono text-xs font-bold ${systemStatus.status === 'ready' ? 'text-success' : 'text-warning'}`}
                 >
                   {systemStatus.status === 'ready'
                     ? t('settings.footer.status.ready')

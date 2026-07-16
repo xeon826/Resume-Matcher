@@ -13,15 +13,15 @@ const SUB_SCORE_LABELS: Record<string, string> = {
 };
 
 function scoreColor(value: number): string {
-  if (value >= 80) return 'text-green-400';
-  if (value >= 60) return 'text-yellow-400';
-  return 'text-red-400';
+  if (value >= 80) return 'text-success';
+  if (value >= 60) return 'text-warning';
+  return 'text-destructive';
 }
 
 function barColor(value: number): string {
-  if (value >= 80) return 'bg-green-500';
-  if (value >= 60) return 'bg-yellow-500';
-  return 'bg-red-500';
+  if (value >= 80) return 'bg-success';
+  if (value >= 60) return 'bg-warning';
+  return 'bg-destructive';
 }
 
 function clampWidth(value: number): number {

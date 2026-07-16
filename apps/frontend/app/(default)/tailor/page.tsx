@@ -348,19 +348,17 @@ export default function TailorPage() {
 
         {/* LLM Not Configured Warning */}
         {!statusLoading && !isLlmConfigured && (
-          <div className="mb-6 border-2 border-amber-500 bg-amber-50 p-4 shadow-sw-default">
+          <div className="mb-6 border-2 border-warning bg-warning/10 p-4 shadow-sw-default">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-warning shrink-0 mt-0.5" />
               <div className="flex-1">
-                <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
+                <p className="font-mono text-sm font-bold uppercase tracking-wider text-warning">
                   {t('tailor.setupRequiredTitle')}
                 </p>
-                <p className="font-mono text-xs text-amber-700 mt-1">
-                  {t('tailor.noApiKeyMessage')}
-                </p>
+                <p className="font-mono text-xs text-warning mt-1">{t('tailor.noApiKeyMessage')}</p>
                 <Link
                   href="/settings"
-                  className="inline-flex items-center gap-2 mt-3 text-amber-700 hover:text-amber-900 transition-colors"
+                  className="inline-flex items-center gap-2 mt-3 text-warning hover:text-warning transition-colors"
                 >
                   <Settings className="w-4 h-4" />
                   <span className="font-mono text-xs font-bold uppercase underline">
@@ -424,7 +422,7 @@ export default function TailorPage() {
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm font-mono flex items-center gap-2">
+            <div className="p-4 bg-destructive/10 border border-destructive/30 text-destructive text-sm font-mono flex items-center gap-2">
               <span>!</span> {error}
             </div>
           )}

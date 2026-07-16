@@ -65,9 +65,9 @@ export function QuestionCard({
   };
 
   return (
-    <section className="border-2 border-black bg-white shadow-sw-lg">
+    <section className="border-2 border-border bg-card shadow-sw-lg">
       <div
-        className="flex gap-1 border-b-2 border-black p-2"
+        className="flex gap-1 border-b-2 border-border p-2"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={totalSegments}
@@ -78,15 +78,15 @@ export function QuestionCard({
             key={index}
             className={
               index < progress.current
-                ? 'h-1.5 flex-1 border border-black bg-black'
-                : 'h-1.5 flex-1 border border-black bg-white'
+                ? 'h-1.5 flex-1 border border-border bg-foreground'
+                : 'h-1.5 flex-1 border border-border bg-muted'
             }
           />
         ))}
       </div>
 
       <div className="grid gap-6 p-5 md:p-8">
-        <p className="font-mono text-xs font-bold uppercase tracking-wider text-blue-700">
+        <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">
           {sectionLabel}
         </p>
         <h2 className="font-serif text-3xl font-bold leading-tight md:text-4xl">{question}</h2>
@@ -97,7 +97,7 @@ export function QuestionCard({
               {warnings.map((warning, index) => (
                 <li
                   key={index}
-                  className="border border-steel-grey bg-white px-3 py-2 font-sans text-sm text-steel-grey"
+                  className="border border-border bg-paper-tint px-3 py-2 font-sans text-sm text-muted-foreground"
                 >
                   {warning}
                 </li>
@@ -118,19 +118,19 @@ export function QuestionCard({
               onChange={(event) => onAnswerChange(event.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isBusy}
-              className="min-h-40 bg-white font-sans text-base"
+              className="min-h-40 font-sans text-base"
             />
           </div>
         )}
 
         {isQuestion && isComplete && (
-          <p className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-green-700">
-            <span aria-hidden="true" className="inline-block h-3 w-3 bg-green-700" />
+          <p className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-success">
+            <span aria-hidden="true" className="inline-block h-3 w-3 bg-success" />
             {t('resumeWizard.readyHint')}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-3 border-t-2 border-black pt-5">
+        <div className="flex flex-wrap gap-3 border-t-2 border-border pt-5">
           {isReview ? (
             <>
               <Button

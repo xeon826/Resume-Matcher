@@ -182,7 +182,7 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
 
       {/* Expandable Content */}
       {isExpanded && (
-        <div className="border-t border-black p-4 space-y-6">
+        <div className="border-t border-border p-4 space-y-6">
           {/* Template Selection */}
           <div>
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-3 text-ink-soft">

@@ -316,20 +316,20 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Configuration Warning Banner */}
       {masterResumeId && !isLlmConfigured && !statusLoading && (
-        <div className="border-2 border-warning bg-amber-50 p-4 shadow-sw-default mb-6 flex items-center justify-between">
+        <div className="border-2 border-warning bg-warning/10 p-4 shadow-sw-default mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-warning" />
             <div>
-              <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
+              <p className="font-mono text-sm font-bold uppercase tracking-wider text-warning">
                 {t('dashboard.llmNotConfiguredTitle')}
               </p>
-              <p className="font-mono text-xs text-amber-700 mt-0.5">
+              <p className="font-mono text-xs text-warning mt-0.5">
                 {t('dashboard.llmNotConfiguredMessage')}
               </p>
             </div>
           </div>
           <Link href="/settings">
-            <Button variant="outline" size="sm" className="border-warning text-amber-700">
+            <Button variant="outline" size="sm" className="border-warning text-warning">
               <Settings className="w-4 h-4 mr-2" />
               {t('nav.settings')}
             </Button>
@@ -345,20 +345,20 @@ export default function DashboardPage() {
             <Link href="/settings" className="block h-full">
               <Card
                 variant="interactive"
-                className="aspect-square h-full border-dashed border-warning bg-amber-50"
+                className="aspect-square h-full border-dashed border-warning bg-warning/10"
               >
                 <div className="flex-1 flex flex-col justify-between">
-                  <div className="w-14 h-14 border-2 border-warning bg-white flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 border-2 border-warning bg-card flex items-center justify-center mb-4">
                     <AlertTriangle className="w-7 h-7 text-warning" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg uppercase text-amber-800 mb-2">
+                    <CardTitle className="text-lg uppercase text-warning mb-2">
                       {t('dashboard.setupRequiredTitle')}
                     </CardTitle>
-                    <CardDescription className="text-amber-700 text-xs">
+                    <CardDescription className="text-warning text-xs">
                       {t('dashboard.setupRequiredMessage')}
                     </CardDescription>
-                    <div className="flex items-center gap-2 mt-4 text-amber-700 group-hover:text-amber-900">
+                    <div className="flex items-center gap-2 mt-4 text-warning group-hover:text-warning">
                       <Settings className="w-4 h-4" />
                       <span className="font-mono text-xs font-bold uppercase">
                         {t('nav.goToSettings')}

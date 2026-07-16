@@ -260,7 +260,7 @@ export function ResumeWizardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background px-4 py-6 text-black md:px-8 md:py-10">
+    <main className="min-h-screen bg-background px-4 py-6 text-foreground md:px-8 md:py-10">
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="grid gap-4">
           <div className="flex items-center justify-between">
@@ -273,8 +273,8 @@ export function ResumeWizardPage() {
           </div>
 
           {errorKey && (
-            <div className="border-2 border-red-600 bg-red-100 p-4" role="alert">
-              <p className="font-mono text-sm font-bold uppercase tracking-wider text-red-600">
+            <div className="border-2 border-destructive bg-destructive/10 p-4" role="alert">
+              <p className="font-mono text-sm font-bold uppercase tracking-wider text-destructive">
                 {t('common.error')}
               </p>
               <p className="mt-1 font-sans text-sm">{t(errorKey)}</p>
