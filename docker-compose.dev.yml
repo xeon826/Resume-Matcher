@@ -21,7 +21,7 @@ services:
   resume-matcher:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       target: development
     image: resume-matcher:dev
     container_name: resume-matcher-dev
